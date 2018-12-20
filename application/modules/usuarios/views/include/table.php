@@ -25,7 +25,7 @@
                     </td>
 
             </tr>
-            <? endif ?>
+            <?php endif ?>
 
         <?php endforeach ?>
 
