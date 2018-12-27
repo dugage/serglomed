@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 //$config['base_url'] = 'http://localhost/serglomet/';
-$config['base_url'] = 'http://www.pruebasdugage.es/serglomed/';
+$config['base_url'] = 'http://159.65.122.45/intranet/';
 
 /*
 |--------------------------------------------------------------------------
