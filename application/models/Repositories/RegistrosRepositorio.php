@@ -95,7 +95,9 @@ class RegistrosRepositorio extends EntityRepository
 
 		//almacenamos la hora actual en la que realizamos la consulta
 		$hour = date('G.i');
-		$query = $this->_em->createQuery("SELECT u FROM $this->entity u WHERE u.idusuario = $usuario $andId AND u.fregistro = CURRENT_DATE() AND u.oculto = 0 AND u.softDelete = 0 ORDER BY u.tregistro ASC, u.idestado ASC")
+		//desde ahora la consulta se realiza sobre $codeactivity
+		$codeactivity = date('Ymd');
+		$query = $this->_em->createQuery("SELECT u FROM $this->entity u WHERE u.idusuario = $usuario $andId AND u.codeactivity = $codeactivity AND u.oculto = 0 AND u.softDelete = 0 ORDER BY u.tregistro ASC, u.idestado ASC")
 		->setMaxResults(1);
 
 		if($query->getOneOrNullResult() == null)
