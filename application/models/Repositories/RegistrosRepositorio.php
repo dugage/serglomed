@@ -97,14 +97,40 @@ class RegistrosRepositorio extends EntityRepository
 		$hour = date('G.i');
 		//desde ahora la consulta se realiza sobre $codeactivity
 		$codeactivity = date('Ymd');
-		$query = $this->_em->createQuery("SELECT u FROM $this->entity u WHERE u.idusuario = $usuario $andId AND u.codeactivity = $codeactivity AND u.oculto = 0 AND u.softDelete = 0 ORDER BY u.tregistro ASC, u.idestado ASC")
+		/*
+		13/01/2019
+		-----------
+		Para mejorar la experienca a la hora del salto de llamadas, vamos a realizarlo 
+		de la siguiente forma.
+		1.Realizamos una consuta sobre idestado = 2, que son los volver a llamar, donde este tendrá
+		que tener un valor igual o mayor a la hora actual y una fecha igual a la actual
+		,ordenaremos de forma ASC.
+		2. Si la consulta no retorna resultado, entonces realizamos una consutla donde idestado != 2 
+		manteniendo el order by u.tregistro ASC, u.idestado ASC
+		3. Si la segunda opción tampoco retorna resultado, realizamos una última sobre idestado = 4 que es 
+		igual a sin estado.
+
+		*/
+		$query = $this->_em->createQuery("SELECT u FROM $this->entity u WHERE u.idusuario = $usuario $andId 
+		AND u.codeactivity = $codeactivity AND u.oculto = 0 AND u.softDelete = 0 AND u.idestado = 2
+		ORDER BY u.tregistro ASC")
 		->setMaxResults(1);
+
+		if( $query->getOneOrNullResult() == null ){
+
+			$query = $this->_em->createQuery("SELECT u FROM $this->entity u WHERE u.idusuario = $usuario $andId 
+			AND u.codeactivity = $codeactivity AND u.oculto = 0 AND u.softDelete = 0 
+			ORDER BY u.tregistro ASC, u.idestado ASC")
+			->setMaxResults(1);
+
+		}
 
 		if($query->getOneOrNullResult() == null)
 		{
 
-			$query = $this->_em->createQuery("SELECT u FROM $this->entity u WHERE u.idusuario = $usuario $andId AND u.oculto = 0 AND u.softDelete = 0 AND u.idestado = 4 ORDER BY u.prima DESC")
-		->setMaxResults(1);
+			$query = $this->_em->createQuery("SELECT u FROM $this->entity u WHERE u.idusuario = $usuario $andId 
+			AND u.oculto = 0 AND u.softDelete = 0 AND u.idestado = 4 ORDER BY u.prima DESC")
+		  	->setMaxResults(1);
 
 		}
 
