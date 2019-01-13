@@ -119,7 +119,7 @@ class RegistrosRepositorio extends EntityRepository
 		if( $query->getOneOrNullResult() == null ){
 
 			$query = $this->_em->createQuery("SELECT u FROM $this->entity u WHERE u.idusuario = $usuario $andId 
-			AND u.codeactivity = $codeactivity AND u.oculto = 0 AND u.softDelete = 0 
+			AND u.codeactivity = $codeactivity AND u.oculto = 0 AND u.softDelete = 0 AND u.idestado != 2
 			ORDER BY u.tregistro ASC, u.idestado ASC")
 			->setMaxResults(1);
 
