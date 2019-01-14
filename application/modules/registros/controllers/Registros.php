@@ -39,7 +39,7 @@ class Registros  extends MX_Controller
             $this->totalRecord = count($this->doctrine->em->getRepository("Entities\\Registros")->findAll());
         }
 
-        $this->limit = 100;
+        $this->limit = 20;
     }
 
     
