@@ -61,19 +61,23 @@ class RegistrosRepositorio extends EntityRepository
 			}
 		}
 
-		//AND u.fregistro = CURRENT_DATE()
-    //SELECT *, (CASE WHEN fRegistro = CURRENT_DATE THEN 1 ELSE 0 END) AS prioridad FROM registros ORDER BY `prioridad` ASC
-	  /*	$query = $this->_em->createQuery("SELECT u FROM $this->entity u WHERE u.idusuario = $usuario AND u.oculto = 0 AND u.softDelete = 0 $where ORDER BY u.prima DESC, u.renovation ASC")
-	    ->setFirstResult($start)
-	    ->setMaxResults($max);
-      */
+  	/*$query = $this->_em->createQuery("SELECT u FROM $this->entity u WHERE u.idusuario = $usuario AND u.oculto = 0 AND u.softDelete = 0 $where ORDER BY u.prima DESC, u.renovation ASC")
+    ->setFirstResult($start)
+    ->setMaxResults($max);
+  	*/
     
     //$hoy = date();
-    $query = $this->_em->createQuery("SELECT u FROM $this->entity u WHERE u.idusuario = $usuario AND u.oculto = 0 AND u.softDelete = 0 $where ORDER BY u.fregistro DESC, u.prima DESC, u.renovation ASC")
+    // Último código comentado
+    /*$query = $this->_em->createQuery("SELECT u FROM $this->entity u WHERE u.idusuario = $usuario AND u.oculto = 0 AND u.softDelete = 0 $where ORDER BY u.fregistro DESC, u.prima DESC, u.renovation ASC")
+      ->setFirstResult($start)
+      ->setMaxResults($max);
+	*/
+	  $query = $this->_em->createQuery("SELECT u, (CASE WHEN u.fregistro = CURRENT_DATE() THEN 1 ELSE 0 END) as hidden priority FROM $this->entity u WHERE u.idusuario = $usuario AND u.oculto = 0 AND u.softDelete = 0 $where ORDER BY priority DESC, u.prima DESC, u.renovation ASC")
       ->setFirstResult($start)
       ->setMaxResults($max);
 
-	  	return $query->getResult();
+      return $query->getResult();
+
 	}
 
 	public function getNextRecord($usuario,$id = 0)
