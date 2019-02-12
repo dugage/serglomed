@@ -246,7 +246,7 @@ var PagesActions = {
 
             var type = 'POST';
             var url = site_url+'/registros/get_num_records';
-            var data = {'id':id,'provincia':provincia,'poblacion':poblacion,'estado':estado,'cp':cp, 'vencimiento': renovation,'prima': prima, typeCon':typeCon};
+            var data = {'id':id,'provincia':provincia,'poblacion':poblacion,'estado':estado,'cp':cp, 'vencimiento': renovation,'prima': prima, 'typeCon':typeCon};
 
             var returndata = ActionAjax(type,url,data,null,null,true,false);
             result = JSON.parse(returndata);
