@@ -73,6 +73,7 @@ class Roles  extends MX_Controller
                 $rol = new Entities\Roles;
                 //seteamos los datos
                 $rol->setRol($this->input->post('rol'));
+                $rol->setPermisos(0);
                 //guardamos
                 $this->doctrine->em->persist($rol);
                 $this->doctrine->em->flush();
@@ -94,18 +95,22 @@ class Roles  extends MX_Controller
         $data['view'] = strtolower(__FUNCTION__."_".$this->nameClass);
         $data['robots'] = 'noindex, nofollow';
         $data['reference'] = strtoupper(__FUNCTION__."-".$this->nameClass);
+        $data['project'] = $this->proyecto;
         //ruta para los botones y acciones
         $data['path'] = $this->uri->segment(1).'/'.$this->uri->segment(2);
-
         //icono del módulo
         $data['icono'] = $this->icono;
         // titulo del módulo
         $data['h1'] = 'Editar '.substr($this->nameClass, 0, -2);
         //lista migas pan
         $data['breadcrumb'] = array($this->nameClass,'Editar '.substr($this->nameClass, 0, -2));
-
         //obtenemos los datos por su id
         $data['getRow'] = $this->doctrine->em->find("Entities\\Roles", $id);
+        //obtenemos los módules desde la tabla menuPanel
+        $data['getModules'] = $this->doctrine->em->getRepository("Entities\\Menupanel")->findAll();
+        //pasamos a la vista los permisos en forma de vectos
+        $data['permissions'] =  explode(',',$data['getRow']->getPermisos());
+        //var_dump($data['permissions']);
         //comprobamos formulario submit
         if(isset($_POST['submit']))
         {
@@ -137,6 +142,26 @@ class Roles  extends MX_Controller
         $path = $this->uri->segment(1).'/'.$this->uri->segment(2);
         //redireccionamos
         redirect(site_url($path));
+    }
+    /**
+     * Metodo que guarda y actualiza los módulos 
+     * a los que tiene acceso el usuario.
+     */
+    public function setPermissions($id)
+    {
+        //comprobamos si se envio el formulario
+        if(isset($_POST['submit-permissions']))
+        {
+            //convertimos el vector en un string separado por coma
+            $permissions = implode(',',$_POST['module']);
+            //instanciamos el rol
+            $rol = $this->doctrine->em->find("Entities\\Roles", $id);
+            $rol->setPermisos($permissions);
+            $this->doctrine->em->flush();
+ 
+        }
+        //redireccionamos al edit
+        redirect(site_url('configuracion/roles/edit/'.$id));
     }
 
 }

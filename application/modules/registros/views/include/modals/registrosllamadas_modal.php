@@ -31,6 +31,26 @@
 
                     </div>
 
+                    <div id="reason" style="display: none;">
+
+                        <div class="form-group">
+
+                            <label>Motivo</label>
+
+                            <select data-id="<?= $id ?>" id="reasons" name="reason" class="form-control">
+
+                                <?php foreach($getReasons as $reason): ?>
+
+                                    <option value="<?= $reason->getName() ?>"><?= $reason->getName() ?></option>
+
+                                <?php endforeach ?>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
                     <div id="date-hour">
 
                         <div class="form-group">

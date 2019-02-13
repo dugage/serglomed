@@ -43,23 +43,6 @@
 
                         <div class="form-group">
 
-                            <label>Vencimiento</label>
-
-                            <input name="renovation" class="form-control renovation" placeholder="" type="text">
-
-                        </div>
-
-                        <div class="form-group">
-
-                            <label>Prima</label>
-
-                            <input name="prima" class="form-control prima" placeholder="" type="text">
-
-                        </div>
-
-
-                        <div class="form-group">
-
                             <label>Estado</label>
 
                             <select name="estadoReg" class="form-control estadoReg">

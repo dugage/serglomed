@@ -53,6 +53,10 @@ class Argumentario  extends MX_Controller
         $data['reference'] = strtoupper(__FUNCTION__ . "-" . $this->nameClass);
         //ruta para los botones y acciones
         $data['path'] = $this->uri->segment(1) . '/' . $this->uri->segment(2);
+        //pasamos css para esta página
+        $data['css'] = $this->load->view('css_module/css','',TRUE);
+        //pasamos js para esta página
+        $data['js'] = $this->load->view('js_module/js','',TRUE);
 
         //icono del módulo
         $data['icono'] = $this->icono;
@@ -113,7 +117,11 @@ class Argumentario  extends MX_Controller
         $data['h1'] = 'Editar '.substr($this->nameClass, 0, -2);
         //lista migas pan
         $data['breadcrumb'] = array($this->nameClass,'Editar '.substr($this->nameClass, 0, -2));
-
+        //pasamos css para esta página
+        $data['css'] = $this->load->view('css_module/css','',TRUE);
+        //pasamos js para esta página
+        $data['js'] = $this->load->view('js_module/js','',TRUE);
+        
         //obtenemos los datos por su id
         $data['getRow'] = $this->doctrine->em->find("Entities\\Argumentarios", $id);
         //obtenemos y mostramos todos los datos

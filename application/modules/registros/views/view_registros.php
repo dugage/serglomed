@@ -99,3 +99,4 @@
 
 <?= $this->load->view('include/modals/registrosllamadas_modal') ?>
 <?= $this->load->view('include/modals/argumentario_modal') ?>
+<?= $this->load->view('include/modals/send_info_modal') ?>

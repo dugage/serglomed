@@ -14,6 +14,7 @@
         <?php if($getResult): ?>
 
             <?php foreach ($getResult as $result): ?>
+
                 <tr>
                     <td> <?= $result->getId() ?> </td>
                     <td <?php if( $result->getIdestado()->getId() != 4 ) echo 'style="color:#217EBD;"'?> ><?= $result->getName() ?> <?= $result->getFirstName() ?> <?= $result->getLastName() ?></td>

@@ -96,7 +96,16 @@ $route['configuracion/tipos-documentos'] = 'tipos_documentos';
 $route['configuracion/tipos-documentos/add'] = 'tipos_documentos/add';
 $route['configuracion/tipos-documentos/edit/(:num)'] = 'tipos_documentos/edit/$1';
 $route['configuracion/tipos-documentos/delete/(:num)'] = 'tipos_documentos/delete/$1';
-
+//rutas motivos
+$route['configuracion/motivos'] = 'motivos';
+$route['configuracion/motivos/add'] = 'motivos/add';
+$route['configuracion/motivos/edit/(:num)'] = 'motivos/edit/$1';
+$route['configuracion/motivos/delete/(:num)'] = 'motivos/delete/$1';
+// rutas plantillas
+$route['plantillas'] = 'plantillas';
+$route['plantillas/add'] = 'plantillas/add';
+$route['plantillas/edit/(:num)'] = 'plantillas/edit/$1';
+$route['plantillas/delete/(:num)'] = 'plantillas/delete/$1';
 
 // rutas usuarios
 $route['usuario'] = 'usuarios';

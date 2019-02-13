@@ -24,7 +24,7 @@
 
             <label>Argumentario</label>
 
-            <textarea class="form-control" rows="3" name="argumentario"><?= $getRow->getArgumentario() ?></textarea>
+            <textarea class="form-control content-richtext" rows="3" name="argumentario"><?= $getRow->getArgumentario() ?></textarea>
 
         </div>
 

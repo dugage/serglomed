@@ -129,7 +129,7 @@ class Login  extends MX_Controller
         //obtenemos datos userActivity
         $activity = $this->doctrine->em->getRepository("Entities\\Useractivity")->findOneBy(["id" => $this->session->userdata('idUserActivity')]);
         //seteamos los datos
-        $activity->setTimeout();
+        //$activity->setTimeout();
         //guardamos
         $this->doctrine->em->flush();
         //desmontamos las variables de sesión

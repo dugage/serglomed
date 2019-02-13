@@ -267,6 +267,13 @@ class Registros
     /**
      * @var string
      *
+     * @Column(name="reason", type="string", length=250, precision=0, scale=0, nullable=false, unique=false)
+     */
+    private $reason;
+
+    /**
+     * @var string
+     *
      * @Column(name="lending_number", type="string", length=250, precision=0, scale=0, nullable=false, unique=false)
      */
     private $lendingNumber;
@@ -1255,6 +1262,30 @@ class Registros
     public function getCampaign()
     {
         return $this->campaign;
+    }
+
+    /**
+     * Set reason
+     *
+     * @param string $reason
+     *
+     * @return Registros
+     */
+    public function setReason($reason)
+    {
+        $this->reason = $reason;
+
+        return $this;
+    }
+
+    /**
+     * Get reason
+     *
+     * @return string
+     */
+    public function getReason()
+    {
+        return $this->reason;
     }
 }
 

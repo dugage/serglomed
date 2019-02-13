@@ -4,6 +4,9 @@ var PagesActions = {
 
         $(".menu-toggler").addClass('fold');
         foldMenu();
+        let viweRegsiterEmail = $("#VIEW-REGISTROS input[name='email']").val();
+        if(viweRegsiterEmail != '')
+            $("#VIEW-REGISTROS .send-template").show();
 
     },
 
@@ -342,23 +345,29 @@ var PagesActions = {
                 $('#date-hour').hide();
             }
 
-            if(estado == 27)
+            if( estado == 7 ) {
+                $('#reason').show();
+            }else{
+                $('#reason').hide();
+            }
+
+            if(estado == 8)
             {
-                var cif = $( 'input[name="cif"]').val();
-                var cp = $( 'input[name="cp"]').val();
-                var direccion = $( 'input[name="direccion"]').val();
-                var pContacto = $( 'input[name="perContacto"]').val();
-                var telefono = $( 'input[name="telefono"]').val();
+                var type = 'POST';
+                var url = site_url+'/registros/checkRequiredRegister';
+                var data = {'id':id};
+                //comprobamos si los campos obligatorios estan rellenos y devolvemos true/false
+                var returndata = ActionAjax(type,url,data,null,null,true,false);
+                //si la respuesta es true mostramos el modal event, en caso contrario, mostramos el alert
+                //e informamos al usuario
+                if(returndata == "true"){
 
-                if(cif == "" || cp == "" || direccion == "" || pContacto == "" || telefono == ""){
+                    $('#addEvent').show();
 
-                    alert("Los campos CIF, Código postal, Dirección, Persona de contacto y teléfono son obligatorios para realizar un Firmado.");
+                }else if(returndata == "false"){
+
+                    alert("Los campos CIF, Código postal, Dirección, Persona de contacto, Operador, Nº de líneas y teléfono son obligatorios para realizar una Cita positiva. Además, recuerda que es obligatorio realizar la validación del CIF haciendo click en el botón con el check.");
                     window.location=site_url+"/registros/view/"+id;
-
-                }else{
-
-                    //$('#addEvent').show();
-                    $('#addEvent').hide();
                 }
 
 
@@ -836,6 +845,51 @@ var PagesActions = {
 
         });
     },
+    /**
+     * Método que envía un email con información comercial
+     * seleccionando un template de la entidad Templates
+     */
+    SendInfo: function(){
+
+        $('body').on('click', '.send-info-template', function(e){
+            //obtenemos el template seleccionado
+            let template = $('.info-templates').val();
+            //comprobamos si se selecciono o no una opción
+            if( template == 0 ){
+                $('#modalSendInfo .alert-danger').show();
+            }else{
+                $('#modalSendInfo .alert-danger').hide();
+                //mostramos el msm de enviando.
+                $('#modalSendInfo .alert-info').html('<i class="fa fa-clock-o" aria-hidden="true"></i> Enviando información...');
+                $('#modalSendInfo .alert-info').show();
+                //realizamos un post mediante ajax
+                let type = 'POST';
+                let url = site_url+'/plantillas/sendTemplate';
+                let data = {'template':template};
+                //obtenemos lo retornado, que en este caso puede ser un
+                //mensage positivo o negativo para informar al teleoperador.
+                var returndata = ActionAjax(type,url,data,null,null,true,false);
+                result = JSON.parse(returndata);
+                
+                if( result.result ){
+
+                    $('#modalSendInfo .alert-success').text('La información ha sido enviada con éxito');
+                    $('#modalSendInfo .alert-info').hide();
+                    $('#modalSendInfo .alert-success').show();
+
+                }else{
+
+                    $('#modalSendInfo .alert-danger').html('<strong>Ups</strong> Hemos tenido un problema y la información no ha podido ser enviada.');
+                    $('#modalSendInfo .').hide();
+                    $('#modalSendInfo .alert-danger').show();
+                }
+                
+                console.log(result.msm);
+            }
+            
+
+        });
+    },
 }
 function foldMenu(){
 
@@ -880,3 +934,4 @@ $(window).load(PagesActions.DrawModal);
 $(window).load(PagesActions.CheckRequired);
 $(window).load(PagesActions.GetArgumentario);
 $(window).load(PagesActions.SoftDelete);
+$(window).load(PagesActions.SendInfo);
