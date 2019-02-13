@@ -36,7 +36,7 @@ class Registros  extends MX_Controller
 
         }else{
 
-            $this->totalRecord = count($this->doctrine->em->getRepository("Entities\\Registros")->findAll());
+            //$this->totalRecord = count($this->doctrine->em->getRepository("Entities\\Registros")->findAll());
         }
 
         $this->limit = 20;
@@ -817,6 +817,8 @@ class Registros  extends MX_Controller
             $provincia = $this->input->post('provincia');
             $poblacion = $this->input->post('poblacion');
             $cp = $this->input->post('cp');
+            $vencimiento = $this->input->post('renovation');
+            $prima = $this->input->post('prima');
             $estado = $this->input->post('estadoReg');
             $typeCon = $this->input->post('type');
             $date = $this->input->post('date');
@@ -825,10 +827,12 @@ class Registros  extends MX_Controller
 
             $param = array(
 
-                        'provincia' => $provincia,
-                        'poblacion' => $poblacion,
-                        'poblacion' => $poblacion,
-                        'cp' => $cp,
+                        'province' => $provincia,
+                        'city' => $poblacion,
+                        //'poblacion' => $poblacion,
+                        'zip' => $cp,
+                        'renovation' => $vencimiento,
+                        'prima' => $prima,
                         'idestado' => $estado
                     );
            
@@ -900,15 +904,19 @@ class Registros  extends MX_Controller
             $provincia = $this->input->post('provincia');
             $poblacion = $this->input->post('poblacion');
             $cp = $this->input->post('cp');
+            $vencimiento = $this->input->post('vencimiento');
+            $prima =  $this->input->post('prima');
             $estado = $this->input->post('estado');
             $typeCon = $this->input->post('typeCon');
 
             $param = array(
 
-                        'provincia' => $provincia,
-                        'poblacion' => $poblacion,
-                        'poblacion' => $poblacion,
-                        'cp' => $cp,
+                        'province' => $provincia,
+                        'city' => $poblacion,
+                        'renovation' => $vencimiento,
+                        'prima' => $prima,
+                        //'poblacion' => $poblacion,
+                        'zip' => $cp,
                         'idestado' => $estado
                     );
 

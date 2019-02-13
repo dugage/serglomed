@@ -239,12 +239,14 @@ var PagesActions = {
             var provincia = $('.provincia').val();
             var poblacion = $('.poblacion').val();
             var cp = $('.cp').val();
+            var vencimiento = $('.renovation').val();
+            var prima = $('.prima').val();
             var estado = $('.estadoReg').val();
             var typeCon = $('#typeCon:checked').val();
 
             var type = 'POST';
             var url = site_url+'/registros/get_num_records';
-            var data = {'id':id,'provincia':provincia,'poblacion':poblacion,'estado':estado,'cp':cp,'typeCon':typeCon};
+            var data = {'id':id,'provincia':provincia,'poblacion':poblacion,'estado':estado,'cp':cp, 'vencimiento': renovation,'prima': prima, 'typeCon':typeCon};
 
             var returndata = ActionAjax(type,url,data,null,null,true,false);
             result = JSON.parse(returndata);
