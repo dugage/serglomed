@@ -465,4 +465,69 @@ class Home  extends MX_Controller
         }
     }
 
+    public function loadRegister()
+    {
+        $csv = file('assets/csv/febrero8.csv');
+
+        foreach ($csv as $key => $value){
+
+            $registro = explode(";", $value);
+            $reg = new Entities\Registros;
+
+            if( $key > 0 ) {
+                $registro[29];
+                $user = $this->doctrine->em->find("Entities\\Usuarios", $registro[29]);
+                $campaign = $this->doctrine->em->find("Entities\\Campaigns", $registro[28]);
+                $state = $this->doctrine->em->find("Entities\\Estadosregistros", 4);
+
+                $reg->setDocumentNumber($registro[0]);
+                $reg->setName($registro[1]);
+                $reg->setFirstName($registro[2]);
+                $reg->setLastName($registro[3]);
+                $reg->setModality($registro[4]);
+                $reg->setPeriodicity($registro[5]);
+                $reg->setNewPeriodicity($registro[6]);
+                $reg->setRenovation(new \DateTime($registro[7]));
+                //$reg->setRenovation(new \DateTime("now"));
+                $reg->setCheckingAccount($registro[8]);
+                $reg->setPrima($registro[9]);
+                $reg->setCapital($registro[10]);
+                $reg->setTelephone($registro[11]);
+                $reg->setWay($registro[12]);
+                $reg->setAddress($registro[13]);
+                $reg->setCity($registro[14]);
+                $reg->setZip($registro[15]);
+                $reg->setProvince($registro[16]);
+                $reg->setGender($registro[17]);
+                $reg->setBirdDate(new \DateTime($registro[18]));
+                //$reg->setBirdDate(new \DateTime("now"));
+                $reg->setAge($registro[19]);
+                $reg->setActualCob($registro[20]);
+
+                //$reg->setPrimaOpc1($registro[21]);
+                //$reg->setCobOpc1($registro[22]);
+                //$reg->setAhorroeuOpc1($registro[23]);
+                //$reg->setAhorropercentOpc1($registro[24]);
+
+                $reg->setPrimaOpc1(0);
+                $reg->setCobOpc1(0);
+                $reg->setAhorroeuOpc1(0);
+                $reg->setAhorropercentOpc1(0);
+
+                $reg->setPrimaOpc2($registro[25]);
+                $reg->setAhorroeuOpc2($registro[26]);
+                $reg->setCampaign($campaign);
+                $reg->setIdestado($state);
+                $reg->setIdusuario($user);
+                $reg->setSelecRies($registro[30]);
+                $reg->setTregistro(0);
+
+                $this->doctrine->em->persist($reg);
+                $this->doctrine->em->flush();
+    
+            }
+
+        }
+    }
+
 }

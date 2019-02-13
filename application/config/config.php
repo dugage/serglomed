@@ -23,8 +23,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-//$config['base_url'] = 'http://localhost/serglomet/';
-$config['base_url'] = 'http://159.65.122.45/intranet/';
+$config['base_url'] = 'http://serglomed.local/intranet/';
+//$config['base_url'] = 'http://159.65.122.45/intranet/';
 
 /*
 |--------------------------------------------------------------------------
