@@ -31,13 +31,29 @@
 
                             <input name="poblacion" class="form-control poblacion" placeholder="" type="text">
 
-                        </div>
+                        </div> 
 
                         <div class="form-group">
 
                             <label>CP</label>
 
                             <input name="cp" class="form-control cp" placeholder="" type="text">
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>Vencimiento</label>
+
+                            <input name="renovation" class="form-control renovation" placeholder="" type="text">
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>Prima</label>
+
+                            <input name="prima" class="form-control prima" placeholder="" type="text">
 
                         </div>
 
