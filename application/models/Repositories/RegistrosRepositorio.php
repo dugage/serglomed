@@ -117,4 +117,28 @@ class RegistrosRepositorio extends EntityRepository
     //UPDATE `serglomed`.`registros` SET `soft_delete` = '1' WHERE `registros`.`idUsuario` = 5;
     $this->_em->createQuery("UPDATE $this->entity u SET u.softDelete = 1 WHERE u.idusuario = $idUsuario");
   }
+
+  public function findByMultiple($param,$usuario,$type)
+    {
+      $where = "";
+      foreach ($param as $key => $value) 
+      {
+        if($value != null OR $value != '')
+        {
+          if($key == "idestado" AND $type == 1)
+          {
+            $where .= "AND u.$key != $value ";
+          }else
+          {
+            $where .= "AND u.$key = '$value' ";
+          }
+          
+        }
+        
+      }
+      $query = $this->_em->createQuery("SELECT u FROM $this->entity u WHERE u.idusuario = $usuario $where AND u.softDelete = 0 ORDER BY u.prima DESC");
+      return $query->getResult();
+    }
+
+
 }

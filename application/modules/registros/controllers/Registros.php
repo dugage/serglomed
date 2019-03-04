@@ -822,7 +822,7 @@ class Registros  extends MX_Controller
             $provincia = $this->input->post('provincia');
             $poblacion = $this->input->post('poblacion');
             $cp = $this->input->post('cp');
-            $vencimiento = $this->input->post('renovation');
+            $vencimiento = $this->input->post('vencimiento');
             $prima = $this->input->post('prima');
             $estado = $this->input->post('estadoReg');
             $typeCon = $this->input->post('type');
