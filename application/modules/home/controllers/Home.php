@@ -467,7 +467,7 @@ class Home  extends MX_Controller
 
     public function loadRegister()
     {
-        $csv = file('assets/csv/febrero8.csv');
+        $csv = file('assets/csv/MARZO4.csv');
 
         foreach ($csv as $key => $value){
 
@@ -504,18 +504,19 @@ class Home  extends MX_Controller
                 $reg->setAge($registro[19]);
                 $reg->setActualCob($registro[20]);
 
-                //$reg->setPrimaOpc1($registro[21]);
-                //$reg->setCobOpc1($registro[22]);
-                //$reg->setAhorroeuOpc1($registro[23]);
-                //$reg->setAhorropercentOpc1($registro[24]);
+                $reg->setPrimaOpc1($registro[21]);
+                $reg->setCobOpc1($registro[22]);
+                $reg->setAhorroeuOpc1($registro[23]);
+                $reg->setAhorropercentOpc1($registro[24]);
 
-                $reg->setPrimaOpc1(0);
+                /*$reg->setPrimaOpc1(0);
                 $reg->setCobOpc1(0);
                 $reg->setAhorroeuOpc1(0);
-                $reg->setAhorropercentOpc1(0);
+                $reg->setAhorropercentOpc1(0);*/
 
                 $reg->setPrimaOpc2($registro[25]);
                 $reg->setAhorroeuOpc2($registro[26]);
+                $reg->setAhorropercentOpc2($registro[27]);
                 $reg->setCampaign($campaign);
                 $reg->setIdestado($state);
                 $reg->setIdusuario($user);
@@ -527,6 +528,19 @@ class Home  extends MX_Controller
     
             }
 
+        }
+    }
+
+    public function setRenovationCode()
+    {
+        $res = $this->doctrine->em->getRepository("Entities\\Registros")->findBy(["coderenovation" => 0,"softDelete" => 0]);
+        
+        foreach ($res as $key => $re) {
+            $r = $this->doctrine->em->getRepository("Entities\\Registros")->findOneBy(["id" => $re->getId()]);
+            $r->setCoderenovation($re->getRenovation()->format('nj'));
+            $this->doctrine->em->flush();
+            echo $re->getRenovation()->format('nj').'<br/>';
+            
         }
     }
 

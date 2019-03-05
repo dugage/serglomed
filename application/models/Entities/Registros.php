@@ -78,6 +78,13 @@ class Registros
     /**
      * @var string
      *
+     * @Column(name="code_renovation", type="string", length=4, precision=0, scale=0, nullable=true, unique=false)
+     */
+    private $coderenovation;
+
+    /**
+     * @var string
+     *
      * @Column(name="checking_account", type="text", length=65535, precision=0, scale=0, nullable=false, unique=false)
      */
     private $checkingAccount;
@@ -1286,6 +1293,30 @@ class Registros
     public function getReason()
     {
         return $this->reason;
+    }
+
+    /**
+     * Set coderenovation
+     *
+     * @param integer $coderenovation
+     *
+     * @return Registros
+     */
+    public function setCoderenovation($coderenovation)
+    {
+        $this->coderenovation = $coderenovation;
+
+        return $this;
+    }
+
+    /**
+     * Get coderenovation
+     *
+     * @return integer
+     */
+    public function getCoderenovation()
+    {
+        return $this->coderenovation;
     }
 }
 
