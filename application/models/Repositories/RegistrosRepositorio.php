@@ -130,6 +130,11 @@ class RegistrosRepositorio extends EntityRepository
             $where .= "AND u.$key != $value ";
           }else
           {
+          	if($key == "renovation"){
+              $vencimiento = new \DateTime($value);
+              $value = $vencimiento->format('Y-m-d');
+            }
+            
             $where .= "AND u.$key = '$value' ";
           }
           
