@@ -42,7 +42,7 @@ class UsuariosRepositorio extends EntityRepository
           
         }elseif( $user == 0 ){
 
-          $query = $this->_em->createQuery("SELECT c,COUNT(c.id) AS TOTAL, u FROM $this->entityUseractivity c JOIN c.idusuario u WHERE c.codeactivity <= $to_ AND c.codeactivity >= $from_ AND c.entity = 'Registros' GROUP BY c.idusuario");
+          $query = $this->_em->createQuery("SELECT u, COUNT(c.id) AS TOTAL FROM $this->entityUser u JOIN $this->entityUseractivity c WITH c.idusuario = u WHERE c.codeactivity <= $to_ AND c.codeactivity >= $from_ AND c.entity = 'Registros' GROUP BY c.idusuario");
           
         }
 
@@ -56,11 +56,11 @@ class UsuariosRepositorio extends EntityRepository
 
           if( $rt == 'NO CONTESTA') {
 
-            $query = $this->_em->createQuery("SELECT c,COUNT(c.id) AS TOTAL, u FROM $this->entityReg c JOIN c.idusuario u WHERE c.codeactivity >= $from_ AND c.codeactivity <= $to_ AND c.idusuario <> 5 AND c.idestado = 5 GROUP BY c.idusuario");
+            $query = $this->_em->createQuery("SELECT u, COUNT(c.id) AS TOTAL FROM $this->entityUser u JOIN $this->entityReg c WITH c.idusuario = u WHERE c.codeactivity >= $from_ AND c.codeactivity <= $to_ AND c.idusuario <> 5 AND c.idestado = 5 GROUP BY c.idusuario");
 
           }else{
 
-            $query = $this->_em->createQuery("SELECT c,COUNT(c.id) AS TOTAL, u FROM $this->entityUseractivity c JOIN c.idusuario u WHERE c.codeactivity <= $to_ AND c.codeactivity >= $from_ AND c.entity = 'Registros' AND c.entityState = '$rt' GROUP BY c.idusuario");
+            $query = $this->_em->createQuery("SELECT u, COUNT(c.id) AS TOTAL FROM $this->entityUser u JOIN $this->entityUseractivity c WITH c.idusuario = u WHERE c.codeactivity <= $to_ AND c.codeactivity >= $from_ AND c.entity = 'Registros' AND c.entityState = '$rt' GROUP BY c.idusuario");
           }
           
           
@@ -260,7 +260,7 @@ class UsuariosRepositorio extends EntityRepository
         $data['body'] = "";
 
         //realizamos al consulta
-        $registers = $this->_em->createQuery("SELECT c,COUNT(c.id) AS TOTAL, u FROM $this->entityUseractivity c JOIN c.idusuario u WHERE c.codeactivity <= $to_ AND c.codeactivity >= $from_ AND c.entity = 'Registros' AND c.entityState = '$rt' GROUP BY c.entityId");
+        $registers = $this->_em->createQuery("SELECT c,COUNT(c.id) AS TOTAL, u FROM $this->entityUseractivity c JOIN c.idusuario u WHERE c.codeactivity <= $to_ AND c.codeactivity >= $from_ AND c.entity = 'Registros' AND c.entityState = '$rt' GROUP BY c.entityId, TOTAL");
         //montamos la cabecera
         $data['header'] .= "DNI; Nombre; Apellido1; Apellido2; Modalidad; Periocidad; Nueva Periocidad; Venci/Renov; Cuenta Corriente; Prima; Capital; Telf.; Vía; Dirección; Población; Cod. Postal; Provincia; Sexo; Fecha Naci.; Edad Actiarial; Cob. Actual; Prima Opc1; Cob Opc1; Ahorro € Opc1; Ahorro % Opc1; Prima Opc2; Ahorro € Opc2; Ahorro % Opc2; Compañia; Selec. Riesgo; Otros Datos;\n";
         //recorremos el resultado
@@ -356,7 +356,7 @@ class UsuariosRepositorio extends EntityRepository
         //donde almacenamos los datos del cuerpo del csv
         $data['body'] = "";
         //realizamos al consulta
-        $registers = $this->_em->createQuery("SELECT c,COUNT(c.id) AS TOTAL, u FROM $this->entityUseractivity c JOIN c.idusuario u WHERE c.codeactivity <= $to_ AND c.codeactivity >= $from_ AND c.entity = 'Registros' AND c.entityState = '$rt' GROUP BY c.entityId");
+        $registers = $this->_em->createQuery("SELECT c,COUNT(c.id) AS TOTAL, u FROM $this->entityUseractivity c JOIN c.idusuario u WHERE c.codeactivity <= $to_ AND c.codeactivity >= $from_ AND c.entity = 'Registros' AND c.entityState = '$rt' GROUP BY c.entityId,TOTAL");
         //montamos la cabecera
         $data['header'] .= "DNI; Nombre; Apellido1; Apellido2; Telf.;\n";
 
