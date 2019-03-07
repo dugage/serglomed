@@ -43,23 +43,9 @@
 
                         <div class="form-group">
 
-                            <label>Vencimiento</label>
+                            <label>Fecha de Vencimento</label>
 
-                            <div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-week-start="1" data-date-language="es">
-
-                                <input name="renovation" class="form-control renovation" placeholder="dd-mm-yyyy" type="text">
-
-                                <span class="input-group-btn">
-
-                                    <button class="btn default" type="button">
-
-                                        <i class="fa fa-calendar"></i>
-
-                                    </button>
-
-                                </span>
-
-                            </div>
+                            <input name="renovation" class="form-control renovation" placeholder="0310 o 310" type="text" value="">
 
                         </div>
 

@@ -165,7 +165,7 @@ class UsuariosRepositorio extends EntityRepository
         if( $user > 0 ) {
 
           $data['dateRange'] = $from.' · '.$to;
-          $data['header'] = 'Cliente; Estado; Comienza; Termina; Total; Fecha';
+          $data['header'] = 'Cliente; Dni; Estado; Comienza; Termina; Total; Fecha';
           $data['trTd'] = '';
      
           foreach ($result as $key => $value)
@@ -174,12 +174,14 @@ class UsuariosRepositorio extends EntityRepository
             $date1 = new \DateTime($value['c_timecnx']->format('Y-m-d H:i:s'));
             $date2 = new \DateTime($value['c_timeout']->format('Y-m-d H:i:s'));
             $diff = $date1->diff($date2);
+            $register = $this->_em->find("Entities\\Registros", $value['c_entityId']);
 
             $s += $diff->s + ($diff->i*60) + ($diff->h*3600);
 
             $data['trTd'] .= '<tr>';
 
             $data['trTd'] .= '<td>'.$value['c_entityValue'].'</td>';
+            $data['trTd'] .= '<td>'.$register->getDocumentNumber().'</td>';
             $data['trTd'] .= '<td>'.$value['c_entityState'].'</td>';
             $data['trTd'] .= '<td>'.$value['c_timecnx']->format("H:i:s").'</td>';
             $data['trTd'] .= '<td>'.$value['c_timeout']->format("H:i:s").'</td>';
@@ -358,7 +360,7 @@ class UsuariosRepositorio extends EntityRepository
         //realizamos al consulta
         $registers = $this->_em->createQuery("SELECT c,COUNT(c.id) AS TOTAL, u FROM $this->entityUseractivity c JOIN c.idusuario u WHERE c.codeactivity <= $to_ AND c.codeactivity >= $from_ AND c.entity = 'Registros' AND c.entityState = '$rt' GROUP BY c.entityId,TOTAL");
         //montamos la cabecera
-        $data['header'] .= "DNI; Nombre; Apellido1; Apellido2; Telf.;\n";
+        $data['header'] .= "DNI; Nombre; Apellido1; Apellido2; Telf; Motivo;\n";
 
         foreach ($registers->getScalarResult() as $key => $value) {
           //mediante el campo entity_id, buscamos el registro
@@ -368,6 +370,12 @@ class UsuariosRepositorio extends EntityRepository
           $data['body'] .= $register->getName().";";
           $data['body'] .= $register->getFirstName().";";
           $data['body'] .= $register->getLastName().";";
+          if(empty($register->getReason())){
+            $data['body'] .= " ;";
+          }else{
+            $data['body'] .= $register->getReason().";";
+          }
+          
           $data['body'] .= "\n";
         }
 

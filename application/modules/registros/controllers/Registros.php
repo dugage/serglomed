@@ -836,7 +836,7 @@ class Registros  extends MX_Controller
                         'city' => $poblacion,
                         //'poblacion' => $poblacion,
                         'zip' => $cp,
-                        'renovation' => $vencimiento,
+                        'coderenovation' => $vencimiento,
                         'prima' => $prima,
                         'idestado' => $estado
                     );

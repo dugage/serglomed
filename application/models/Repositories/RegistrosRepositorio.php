@@ -46,7 +46,7 @@ class RegistrosRepositorio extends EntityRepository
 			}else{
 			    $where = "AND u.".$f." LIKE '%".$q."%'";
 			}
-		}
+		} 
   	/*$query = $this->_em->createQuery("SELECT u FROM $this->entity u WHERE u.idusuario = $usuario AND u.oculto = 0 AND u.softDelete = 0 $where ORDER BY u.prima DESC, u.renovation ASC")
     ->setFirstResult($start)
     ->setMaxResults($max);
@@ -58,7 +58,7 @@ class RegistrosRepositorio extends EntityRepository
       ->setFirstResult($start)
       ->setMaxResults($max);
 	*/
-	  $query = $this->_em->createQuery("SELECT u, (CASE WHEN u.fregistro = CURRENT_DATE() THEN 1 ELSE 0 END) as hidden priority FROM $this->entity u WHERE u.idusuario = $usuario AND u.oculto = 0 AND u.softDelete = 0 $where ORDER BY priority DESC, u.prima DESC, u.renovation ASC")
+	  $query = $this->_em->createQuery("SELECT u, (CASE WHEN u.fregistro = CURRENT_DATE() THEN 1 ELSE 0 END) as hidden priority FROM $this->entity u WHERE u.idusuario = $usuario AND u.oculto = 0 AND u.softDelete = 0 $where ORDER BY priority DESC, u.coderenovation ASC, u.primaOpc1 DESC")
       ->setFirstResult($start)
       ->setMaxResults($max);
       return $query->getResult();
@@ -107,7 +107,7 @@ class RegistrosRepositorio extends EntityRepository
 		if($query->getOneOrNullResult() == null)
 		{
 			$query = $this->_em->createQuery("SELECT u FROM $this->entity u WHERE u.idusuario = $usuario $andId 
-			AND u.oculto = 0 AND u.softDelete = 0 AND u.idestado = 4 ORDER BY u.prima DESC")
+			AND u.oculto = 0 AND u.softDelete = 0 AND u.idestado = 4 ORDER BY u.coderenovation, ASC u.primaOpc1 DESC")
 		  	->setMaxResults(1);
 		}
 		return $query->getOneOrNullResult();
@@ -130,9 +130,8 @@ class RegistrosRepositorio extends EntityRepository
             $where .= "AND u.$key != $value ";
           }else
           {
-          	if($key == "renovation"){
-              $vencimiento = new \DateTime($value);
-              $value = $vencimiento->format('Y-m-d');
+          	if($key == "coderenovation"){
+              $value = intval($value);
             }
             
             $where .= "AND u.$key = '$value' ";
