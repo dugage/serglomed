@@ -165,7 +165,7 @@ class UsuariosRepositorio extends EntityRepository
         if( $user > 0 ) {
 
           $data['dateRange'] = $from.' · '.$to;
-          $data['header'] = 'Cliente; Dni; Estado; Comienza; Termina; Total; Fecha';
+          $data['header'] = 'Cliente; DNI; Estado; Motivo; Comienza; Termina; Total; Fecha';
           $data['trTd'] = '';
      
           foreach ($result as $key => $value)
@@ -183,6 +183,11 @@ class UsuariosRepositorio extends EntityRepository
             $data['trTd'] .= '<td>'.$value['c_entityValue'].'</td>';
             $data['trTd'] .= '<td>'.$register->getDocumentNumber().'</td>';
             $data['trTd'] .= '<td>'.$value['c_entityState'].'</td>';
+            if(empty($register->getReason())){
+              $data['trTd'] .= "<td></td>";
+            }else{
+              $data['trTd'] .= "<td>".$register->getReason()->getName()."</td>";
+            }
             $data['trTd'] .= '<td>'.$value['c_timecnx']->format("H:i:s").'</td>';
             $data['trTd'] .= '<td>'.$value['c_timeout']->format("H:i:s").'</td>';
             $data['trTd'] .= '<td>'.$diff->h.':'.$diff->i.':'.$diff->s.'</td>';
@@ -373,7 +378,7 @@ class UsuariosRepositorio extends EntityRepository
           if(empty($register->getReason())){
             $data['body'] .= " ;";
           }else{
-            $data['body'] .= $register->getReason().";";
+            $data['body'] .= $register->getReason()->getName().";";
           }
           
           $data['body'] .= "\n";
