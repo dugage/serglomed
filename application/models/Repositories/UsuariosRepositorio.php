@@ -186,7 +186,7 @@ class UsuariosRepositorio extends EntityRepository
             if(empty($register->getReason())){
               $data['trTd'] .= "<td></td>";
             }else{
-              $data['trTd'] .= "<td>".$register->getReason()->getname()."</td>";
+              $data['trTd'] .= "<td>".$register->getReason()."</td>";
             }
             $data['trTd'] .= '<td>'.$value['c_timecnx']->format("H:i:s").'</td>';
             $data['trTd'] .= '<td>'.$value['c_timeout']->format("H:i:s").'</td>';
@@ -378,7 +378,7 @@ class UsuariosRepositorio extends EntityRepository
           if(empty($register->getReason())){
             $data['body'] .= " ;";
           }else{
-            $data['body'] .= $register->getReason()->getname().";";
+            $data['body'] .= $register->getReason().";";
           }
           
           $data['body'] .= "\n";
