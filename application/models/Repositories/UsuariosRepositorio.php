@@ -94,12 +94,14 @@ class UsuariosRepositorio extends EntityRepository
 
         if( $user > 0 AND ($rt != 'POLIZA' AND $rt != 'PROYECTO') ) {
 
-          $data['header'] = "Cliente; Estado; Comienza; Termina; Total; Fecha;\n";
+          $data['header'] = "Cliente; Estado; Motivo; Comienza; Termina; Total; Fecha;\n";
           $data['body'] = "";
           $data['filename'] = $rt;
 
           foreach ($result as $key => $value)
           {
+            //Buscamos el registro
+            $register = $this->_em->find("Entities\\Registros", $value['c_entityId']);
             //calculamos el tiempo pasado en la llamada
             $date1 = new \DateTime($value['c_timecnx']->format('Y-m-d H:i:s'));
             $date2 = new \DateTime($value['c_timeout']->format('Y-m-d H:i:s'));
@@ -109,6 +111,11 @@ class UsuariosRepositorio extends EntityRepository
 
             $data['body'] .= $value['c_entityValue'].";";
             $data['body'] .= $value['c_entityState'].";";
+            if(empty($register->getReason())){
+              $data['body'] .= ";";
+            }else{
+              $data['body'] .= $register->getReason().";";
+            }
             $data['body'] .= $value['c_timecnx']->format("H:i:s").";";
             $data['body'] .= $value['c_timeout']->format("H:i:s").";";
             $data['body'] .= $diff->h.':'.$diff->i.':'.$diff->s.";";
