@@ -73,6 +73,15 @@
 
             </div>
 
+
+            <div class="portlet light bordered" id="modalArgumentario">
+                <div class="portlet-title" id="argumentarioTitle"><h4>Argumentario</h4></div>
+                <div class="portlet-body flip-scroll" id="argumentarioBody">
+                    Cuerpo del argumentario
+                </div>
+
+            </div>
+
         </div>
 
         <?php if($getRegistroLlamadas): ?>
@@ -98,5 +107,5 @@
 </div>
 
 <?= $this->load->view('include/modals/registrosllamadas_modal') ?>
-<?= $this->load->view('include/modals/argumentario_modal') ?>
+<!-- <?= $this->load->view('include/modals/argumentario_modal') ?> -->
 <?= $this->load->view('include/modals/send_info_modal') ?>

@@ -1,7 +1,7 @@
 var PagesActions = {
 
     Start: function(){
-
+        $("#modalArgumentario").hide();
         $(".menu-toggler").addClass('fold');
         foldMenu();
         let viweRegsiterEmail = $("#VIEW-REGISTROS input[name='email']").val();
@@ -22,33 +22,33 @@ var PagesActions = {
 
     OpenFileW: function(){
 
-    	$( ".open-file" ).click(function() {
+        $( ".open-file" ).click(function() {
 
-			var cdm = $(this).attr('cmd');
-    		$('input[name="'+cdm+'"]').trigger('click');
+            var cdm = $(this).attr('cmd');
+            $('input[name="'+cdm+'"]').trigger('click');
 
-    	});
+        });
 
-    	$('input[type="file"]').change(function(){
+        $('input[type="file"]').change(function(){
 
-			var cdm = $(this).attr('cmd');
-    		$( 'form[name="form-'+cdm+'"]' ).submit();
+            var cdm = $(this).attr('cmd');
+            $( 'form[name="form-'+cdm+'"]' ).submit();
 
-    	});
+        });
 
     },
 
-	CheckAction: function() {
+    CheckAction: function() {
 
-    	$( ".md-check" ).click(function() {
+        $( ".md-check" ).click(function() {
 
-			var multi = $(this).attr('multi');
-			var field = $(this).attr('field');
-			var table = $(this).attr('table');
-			var id = $(this).attr('key');
-    	    var vl = 0;
+            var multi = $(this).attr('multi');
+            var field = $(this).attr('field');
+            var table = $(this).attr('table');
+            var id = $(this).attr('key');
+            var vl = 0;
 
-			if(multi == 'false'){
+            if(multi == 'false'){
 
                 if(field == 'estado' && table == 'usuarios')
                 {
@@ -67,40 +67,40 @@ var PagesActions = {
                 }
 
 
-			}else{
+            }else{
 
-				vl = "";
-				$('input[name="'+field+'[]"]:checked').each(function() {
-					vl += $(this).val() + ",";
-				});
-				//eliminamos la última coma.
-				vl = vl.substring(0, vl.length-1);
-			}
+                vl = "";
+                $('input[name="'+field+'[]"]:checked').each(function() {
+                    vl += $(this).val() + ",";
+                });
+                //eliminamos la última coma.
+                vl = vl.substring(0, vl.length-1);
+            }
 
-			var type = 'POST';
+            var type = 'POST';
             var url = site_url+'/ajax_actions/update_ajax';
-    	   var data = {'field':field,'table':table,'vl':vl,'id':id,'lang':lang};
-			ActionAjax(type,url,data,null,null,false,false);
+           var data = {'field':field,'table':table,'vl':vl,'id':id,'lang':lang};
+            ActionAjax(type,url,data,null,null,false,false);
 
-    	});
+        });
 
     },
 
-	SelectAction: function(){
+    SelectAction: function(){
 
-    	$( ".md-select" ).change(function() {
+        $( ".md-select" ).change(function() {
 
-			var field = $(this).attr('field');
-			var table = $(this).attr('table');
-			var id = $(this).attr('key');
-    		var vl = $(this).val();
+            var field = $(this).attr('field');
+            var table = $(this).attr('table');
+            var id = $(this).attr('key');
+            var vl = $(this).val();
 
-			var type = 'POST';
-        	var url = site_url+'/ajax_actions/update_ajax';
-    		var data = {'field':field,'table':table,'vl':vl,'id':id,'lang':lang,'nodoctrine':1};
-			ActionAjax(type,url,data,null,null,false,false);
+            var type = 'POST';
+            var url = site_url+'/ajax_actions/update_ajax';
+            var data = {'field':field,'table':table,'vl':vl,'id':id,'lang':lang,'nodoctrine':1};
+            ActionAjax(type,url,data,null,null,false,false);
 
-    	});
+        });
     },
 
     BtnBoolean: function(){
@@ -139,34 +139,34 @@ var PagesActions = {
         });
     },
 
-	TextAction: function(){
+    TextAction: function(){
 
-    	$(".md-text").keyup(function() {
+        $(".md-text").keyup(function() {
 
-			var field = $(this).attr('field');
-			var table = $(this).attr('table');
-			var id = $(this).attr('key');
-    		var vl = $(this).val();
+            var field = $(this).attr('field');
+            var table = $(this).attr('table');
+            var id = $(this).attr('key');
+            var vl = $(this).val();
 
-			action = setTimeout(function(){
+            action = setTimeout(function(){
 
-  				var type = 'POST';
-        		var url = site_url+'/ajax_actions/update_ajax';
-    			var data = {'field':field,'table':table,'vl':vl,'id':id,'lang':lang};
-				ActionAjax(type,url,data,null,null,false,false);
+                var type = 'POST';
+                var url = site_url+'/ajax_actions/update_ajax';
+                var data = {'field':field,'table':table,'vl':vl,'id':id,'lang':lang};
+                ActionAjax(type,url,data,null,null,false,false);
 
-  			}, 300);
+            }, 300);
 
-    	});
+        });
     },
 
-	ShootForm: function(){
+    ShootForm: function(){
 
-    	$( ".md-shoot-form" ).change(function() {
+        $( ".md-shoot-form" ).change(function() {
 
-			$( "#shoot" ).submit();
+            $( "#shoot" ).submit();
 
-    	});
+        });
     },
 
     CheckRequired : function(){
@@ -198,39 +198,39 @@ var PagesActions = {
          });
     },
 
-	//// These isn't generics actions
-	UpdateProductAttribute: function(){
+    //// These isn't generics actions
+    UpdateProductAttribute: function(){
 
-    	$(".impact-attribute").click(function() {
+        $(".impact-attribute").click(function() {
 
-			var id = $(this).attr('id');
-			var id_product = $("#attribute-value-"+id).attr('key');
-			var id_attribute = $("#attribute-value-"+id).attr('attribute');
-			var id_attribute_value = $("#attribute-value-"+id).attr('attribute_value');
-			var impact = $("#attribute-value-"+id).val();
+            var id = $(this).attr('id');
+            var id_product = $("#attribute-value-"+id).attr('key');
+            var id_attribute = $("#attribute-value-"+id).attr('attribute');
+            var id_attribute_value = $("#attribute-value-"+id).attr('attribute_value');
+            var impact = $("#attribute-value-"+id).val();
 
-			var type = 'POST';
-        	var url = site_url+'/productos/update_product_attribute';
-    		var data = {'id_product':id_product,'id_attribute':id_attribute,'id_attribute_value':id_attribute_value,'impact':impact};
-			ActionAjax(type,url,data,null,null,false,false);
+            var type = 'POST';
+            var url = site_url+'/productos/update_product_attribute';
+            var data = {'id_product':id_product,'id_attribute':id_attribute,'id_attribute_value':id_attribute_value,'impact':impact};
+            ActionAjax(type,url,data,null,null,false,false);
 
-    	});
+        });
     },
 
-	GeneratePass : function(){
+    GeneratePass : function(){
 
-		$('.get-pass').click(function(){
+        $('.get-pass').click(function(){
 
-	        var type = 'POST';
-        	var url = site_url+'/usuarios/generate_pass';
-    		var data = {};
+            var type = 'POST';
+            var url = site_url+'/usuarios/generate_pass';
+            var data = {};
 
-    		var returndata = ActionAjax(type,url,data,null,null,true,false);
-    		result = JSON.parse(returndata);
+            var returndata = ActionAjax(type,url,data,null,null,true,false);
+            result = JSON.parse(returndata);
 
-    		$('.pass').val(result);
+            $('.pass').val(result);
 
-		});
+        });
 
     },
 
@@ -238,7 +238,7 @@ var PagesActions = {
 
         $('.usuarioReg').change(function(){
 
-        	var id = $('.usuarioReg').val();
+            var id = $('.usuarioReg').val();
             var provincia = $('.provincia').val();
             var poblacion = $('.poblacion').val();
             var cp = $('.cp').val();
@@ -813,8 +813,8 @@ var PagesActions = {
 
     GetArgumentario: function(){
 
-        $('body').on('click', '.argumentario', function(e){
-
+        $('body').on('click', '.argumentario', function(){
+            $('#modalArgumentario').show();
             var id = $(this).attr('id');
             var campaign = $(this).data( "campaign" );
 
@@ -825,8 +825,11 @@ var PagesActions = {
             var returndata = ActionAjax(type,url,data,null,null,true,false);
             result = JSON.parse(returndata);
 
-            $('#modalArgumentario h4.modal-title').text(result.title);
-            $('#modalArgumentario .modal-body').html(result.body);
+            //$('#modalArgumentario h4.modal-title').text(result.title);
+            //$('#modalArgumentario .modal-body').html(result.body);
+            //console.log(result.title);
+            $('#argumentarioTitle h4').text(result.title);
+            $('#argumentarioBody').html(result.body);
 
         });
     },

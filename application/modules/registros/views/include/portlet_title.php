@@ -30,8 +30,11 @@
 
     <?php if($this->uri->segment(2)  == 'view' AND $rol == 4): ?>
 
-        <a id="0" data-campaign="<?= $getRegistro->getCampaign()->getId() ?>" target="_blank" data-toggle="modal" data-target="#modalArgumentario" class="btn green argumentario" type="button"><i class="fa fa-bullhorn"></i> Argumentario</a>
-        <a style="display:none;" id="0" data-campaign="<?= $getRegistro->getCampaign()->getId() ?>" target="_blank" data-toggle="modal" data-target="#modalSendInfo" class="btn green template send-template" type="button"><i class="fa fa-envelope-o"></i> Enviar info</a>
+        <!-- <a id="0" data-campaign="<?= $getRegistro->getCampaign()->getId() ?>" target="_blank" data-toggle="modal" data-target="#modalArgumentario" class="btn green argumentario" type="button"><i class="fa fa-bullhorn"></i> Argumentario</a> -->
+
+        <a id="0" data-campaign="<?= $getRegistro->getCampaign()->getId() ?>" class="btn green argumentario" type="button"><i class="fa fa-bullhorn"></i> Argumentario</a>
+
+        <a style="display:none;" id="0" data-campaign="<?= $getRegistro->getCampaign()->getId() ?>" target="_blank" data-toggle="modal" data-target="#modalSendInfo" class="btn green template send-template" type="button"><i class="fa fa-envelope-o"></i> Enviar info</a> 
 
     <?php endif ?>
 
