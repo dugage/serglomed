@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 //$config['base_url'] = 'http://serglomed.local/intranet/';
-$config['base_url'] = 'http://serglomed.local/intranet/';
+$config['base_url'] = 'http://192.168.1.34/github/serglomed/';
 
 /*
 |--------------------------------------------------------------------------

@@ -40,7 +40,9 @@
                     
                     <form role="form" method="post">
 
-                        <?= $this->load->view('include/form_edit') ?>
+                        <?= $this->load->view('include/form_edit') ?>   
+
+                       <!-- <?= $this->load->view('include/new_form_edit') ?> -->
 
 
                 </div>
