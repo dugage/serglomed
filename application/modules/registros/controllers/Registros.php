@@ -192,6 +192,154 @@ class Registros  extends MX_Controller
         //obtenemos todos los uausrios con rol teleoperador/a = 4
         $data['getUsuarios'] = $this->doctrine->em->getRepository("Entities\\Usuarios")->findBy(["idrol" => 4,"estado" => 0]);
 
+        $data['getCampaigns'] = $this->doctrine->em->getRepository("Entities\\Campaigns")->findAll();
+
+        //comprobamos formulario submit
+        if (isset($_POST['submit'])){
+
+            //validamos los datos
+            $this->form_validation->set_rules('fRegistro', 'Fecha de Registro', 'required');
+            $this->form_validation->set_rules('user', 'Opeario', 'required');
+            $this->form_validation->set_rules('name', 'Nombre', 'required');
+            $this->form_validation->set_rules('first_name', 'Apellidos 1', 'required');
+            $this->form_validation->set_rules('document_number', 'DNI', 'required');
+            $this->form_validation->set_rules('telephone', 'Teléfono', 'required');
+            $this->form_validation->set_rules('capital', 'Capital', 'required');
+            $this->form_validation->set_rules('prima', 'Prima', 'required');
+
+
+            $this->form_validation->set_rules('bird_date', 'Fecha de Nacimiento', '');
+            $this->form_validation->set_rules('age', 'Edad', '');
+            $this->form_validation->set_rules('gender', 'Sexo', '');
+            $this->form_validation->set_rules('phonenumber', 'Teléfono', '');
+            $this->form_validation->set_rules('email', 'Correo Electrónico', '');
+            $this->form_validation->set_rules('periodicity', 'Periocidad', '');
+            $this->form_validation->set_rules('renovation', 'Vencimiento', '');
+            $this->form_validation->set_rules('capital', 'Capital', '');
+            $this->form_validation->set_rules('prima', 'Prima', '');
+            $this->form_validation->set_rules('checking_account', 'Cuenta Bancaria', 'required');
+            $this->form_validation->set_rules('prima_opc1', '', '');
+            $this->form_validation->set_rules('ahorroeu_opc1', '', '');
+            $this->form_validation->set_rules('cob_opc1', '', '');
+            $this->form_validation->set_rules('ahorropercent_opc1', '', '');
+            $this->form_validation->set_rules('prima_opc2', '', '');
+            $this->form_validation->set_rules('ahorroeu_opc2', '', '');
+            $this->form_validation->set_rules('cob_opc2', '', '');
+            $this->form_validation->set_rules('ahorropercent_opc2', '', '');
+
+
+            $this->form_validation->set_rules('new_periodicity', '', '');
+            $this->form_validation->set_rules('lending_number ', '', '');
+
+            $this->form_validation->set_rules('selec_ries', '', '');
+            $this->form_validation->set_rules('address', '', '');
+            $this->form_validation->set_rules('zip', '', '');
+            $this->form_validation->set_rules('city ', '', '');
+            $this->form_validation->set_rules('province ', '', '');
+
+            $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+
+            if($this->form_validation->run()){
+
+                if($this->rol != 4)
+                {
+                    //obtenemos el usuario seleccionado
+                    $usuario = $this->doctrine->em->find("Entities\\Usuarios", $this->input->post('user'));
+
+                }else{
+
+                    //obtenemos el usuario seleccionado
+                    $usuario = $this->doctrine->em->find("Entities\\Usuarios", $this->usuarioid);
+                }
+                
+                //obtenemos el estado, en este caso siempre estado 4 al crear
+                $estado = $this->doctrine->em->find("Entities\\Estadosregistros", 4);
+                //Obtenemos la campaña
+                $campana  = $this->doctrine->em->find("Entities\\Campaigns", $this->input->post('campaign'));
+                //instanciamos registro
+                $newReg = new Entities\Registros;
+                //seteamos los datos
+                $newReg->setCampaign($campana);
+                $newReg->setIdusuario($usuario);
+                $newReg->setIdestado($estado);
+                $newReg->setTregistro(0.00);
+
+                $newReg->setDocumentNumber($this->input->post('document_number'));
+                $newReg->setName($this->input->post('name'));
+                $newReg->setFirstName($this->input->post('first_name'));
+                $newReg->setLastName($this->input->post('last_name'));
+                $newReg->setModality($this->input->post('modality'));
+                $newReg->setPeriodicity($this->input->post('periodicity'));
+                $newReg->setNewPeriodicity($this->input->post('new_periodicity'));
+                $newReg->setRenovation(new \DateTime($this->input->post('renovation')));
+                $newReg->setCheckingAccount($this->encryption->encrypt($this->input->post('checking_account')));
+                $newReg->setPrima($this->input->post('prima'));
+                $newReg->setCapital($this->input->post('capital'));
+                $newReg->setTelephone($this->input->post('telephone'));
+                $newReg->setWay('');
+                $newReg->setAddress($this->input->post('address'));
+                $newReg->setCity($this->input->post('city'));
+                $newReg->setZip($this->input->post('zip'));
+                $newReg->setProvince($this->input->post('province'));
+                $newReg->setGender($this->input->post('gender'));
+                $newReg->setBirdDate(new \DateTime($this->input->post('bird_date')));
+                $newReg->setAge($this->input->post('age'));
+                $newReg->setActualCob($this->input->post('actual_cob'));
+                $newReg->setPrimaOpc1($this->input->post('prima_opc1'));
+                $newReg->setCobOpc1($this->input->post('cob_opc1'));
+                $newReg->setAhorroeuOpc1($this->input->post('ahorroeu_opc1'));
+                $newReg->setAhorropercentOpc1($this->input->post('ahorropercent_opc1'));
+                $newReg->setPrimaOpc2($this->input->post('prima_opc2'));
+                $newReg->setAhorroeuOpc2($this->input->post('ahorroeu_opc2'));
+                $newReg->setAhorropercentOpc2($this->input->post('ahorropercent_opc2'));
+                //guardamos la entidad en la tabla registros
+                $this->doctrine->em->persist($newReg);
+                $this->doctrine->em->flush();
+
+
+                if ($this->rol != 4) {
+                    //redireccionamos al edit
+                    redirect(site_url($data['path'] . '/edit/' . $newReg->getId()));
+                }else{
+                    //redireccionamos al edit
+                    redirect(site_url($data['path'] . '/view/' . $newReg->getId()));
+                }
+
+            }
+        }
+        //cargamos la vista
+        $this->load->view('templates/panel/layout', $data);
+
+    }
+
+
+    public function __add()
+    {
+        // pasamos los datos básicos del template
+        $data['lang'] = "es";
+        $data['title'] = $this->proyecto->getNombre() . " | Panel de control";
+        $data['view'] = strtolower(__FUNCTION__ . "_" . $this->nameClass);
+        $data['robots'] = 'noindex, nofollow';
+        $data['project'] = $this->proyecto;
+        $data['reference'] = strtoupper(__FUNCTION__ . "-" . $this->nameClass);
+        //icono del módulo
+        $data['icono'] = $this->icono;
+        // titulo del módulo
+        $data['h1'] = $this->nameClass;
+        //lista migas pan
+        $data['breadcrumb'] = array(str_replace('_', ' ', $this->nameClass), 'Crear ' . substr(str_replace('_', ' ', $this->nameClass), 0, -1));
+        //ruta para los botones y acciones
+        $data['path'] = $this->uri->segment(1);
+        //pasamos el rol del usuario
+        $data['rol'] = $this->rol;
+        //pasamos css para esta página
+        $data['css'] = $this->load->view('css_module/css_module','',TRUE);
+        //pasamos js para esta página
+        $data['js'] = $this->load->view('js_module/js_module','',TRUE);
+
+        //obtenemos todos los uausrios con rol teleoperador/a = 4
+        $data['getUsuarios'] = $this->doctrine->em->getRepository("Entities\\Usuarios")->findBy(["idrol" => 4,"estado" => 0]);
+
         //comprobamos formulario submit
         if (isset($_POST['submit'])){
 
@@ -450,7 +598,7 @@ class Registros  extends MX_Controller
 		    		if($key > 0)
 		            {
 		            	//hacemos un explode y convertimos la línea del csv en un vector
-		            	$registro = explode(";", $value);
+		            	$registro = explode(",", $value);
 		            	//lo primero, obtenemos la campaña y el teleoperador y el estao 4 = sin estado
 		            	$campaign = $this->doctrine->em->find("Entities\\Campaigns", $registro[28]);
 		            	$user = $this->doctrine->em->find("Entities\\Usuarios", $registro[29]);
@@ -469,6 +617,8 @@ class Registros  extends MX_Controller
 		            	$newReg->setModality($registro[4]);
 		            	$newReg->setPeriodicity($registro[5]);
 		            	$newReg->setNewPeriodicity($registro[6]);
+
+                        echo $registro[8]. "<br>";
 		            	$newReg->setRenovation(new \DateTime($registro[7]));
 		            	$newReg->setCheckingAccount($this->encryption->encrypt($registro[8]));
 		            	$newReg->setPrima($registro[9]);

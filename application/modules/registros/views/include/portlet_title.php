@@ -6,6 +6,23 @@
 
     <?php endif ?>
 
+    <?php if( isset($getRegsitersDuplicates) AND count($getRegsitersDuplicates) > 1 ): ?>
+
+        <div style="float: right;">
+
+            <?php foreach ($getRegsitersDuplicates as $key => $value): ?>
+                
+                <?php if( $value->getId() != $getRegistro->getId()): ?>
+                    <p style="margin: 7px 0px"> <strong>Registro <?= $value->getId() ?></strong>. <a target="_blank" href="<?= site_url('registros/view/'.$value->getId()) ?>"><?= $value->getName() ?> <?= $value->getFirstName() ?> <?= $value->getLastName() ?></a> | Prima: <?= $value->getPrima() ?> </p>
+                <?php endif ?>
+
+            <?php endforeach ?>
+            
+
+        </div>
+
+    <?php endif ?>
+
     <?php if($this->uri->segment(2)  == '' AND $rol == 1): ?>
 
         <button data-uri="<?= site_url('registros/soft_delete') ?>" title="Limpiar resgistros " style="float: right;" class="btn btn-danger delete-soft" type="button"><i class="fa fa-trash-o" aria-hidden="true"></i> Limpiar resgistros</button>

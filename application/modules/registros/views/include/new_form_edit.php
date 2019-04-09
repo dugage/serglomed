@@ -16,6 +16,7 @@
 
     <div class="row">
         <div class="col-md-4">
+
             <div class="form-group">
 
                 <label>Fecha de Registro</label>
@@ -136,7 +137,7 @@
             </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-2">
             <div class="form-group">
 
                 <label>Edad actuarial</label>
@@ -148,6 +149,26 @@
                     </span>
 
                     <input table="registros" field="modality" key="<?= $id ?>" name="age" class="form-control md-text age" value="<?= $getRegistro->getAge() ?>" type="text">
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="form-group">
+
+                <label>Sexo</label>
+
+                <div class="input-group col-md-12">
+
+                    <select table="registros" field="gender" key="<?= $id ?>" name="last_name" class="form-control md-select">
+
+                        <option></option>
+                        <option <?php if( $getRegistro->getGender() == 'Hombre') echo 'selected' ?> value="M">H</option>
+                        <option <?php if( $getRegistro->getGender() == 'Mujer') echo 'selected' ?> value="F">M</option>
+
+                    </select>
 
                 </div>
 
@@ -175,7 +196,7 @@
         <div class="col-md-4">
             <div class="form-group">
 
-                <label>MOV</label>
+                <label>Móvil</label>
 
                 <div class="input-group col-md-12">
 
@@ -475,7 +496,25 @@
             </div>
         </div>
 
-        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div class="form-group">
+
+                <label>Nueva Periocidad</label>
+
+                <div class="input-group col-md-12">
+
+                    <select table="registros" field="new_periodicity" key="<?= $id ?>" class="form-control md-select">
+                        <option></option>
+                        <option <?php if( $getRegistro->getNewPeriodicity() == 'Anual') echo 'selected' ?> value="Anual">Anual</option>
+                        <option <?php if( $getRegistro->getNewPeriodicity() == 'Semestral') echo 'selected' ?> value="Semestral">Semestral</option>
+                        <option <?php if( $getRegistro->getNewPeriodicity() == 'Trimestral') echo 'selected' ?> value="Trimestral">Trimestral</option>
+                        <option <?php if( $getRegistro->getNewPeriodicity() == 'Único') echo 'selected' ?> value="Único">Único</option>
+                    </select>
+
+                </div>
+
+            </div>
+        </div>
 
 
         <div class="col-md-4">
@@ -590,6 +629,8 @@
         </div>
         
         <div class="clearfix"></div>
+
+        <!--
         <div class="col-md-4">
             <div class="form-group">
 
@@ -607,49 +648,12 @@
 
             </div>
 
-
         </div>
                 
-        <div class="col-md-4">
-            <div class="form-group">
-
-                <label>Nueva Periocidad</label>
-
-                <div class="input-group col-md-12">
-
-                    <select table="registros" field="new_periodicity" key="<?= $id ?>" class="form-control md-select">
-                        <option></option>
-                        <option <?php if( $getRegistro->getNewPeriodicity() == 'Anual') echo 'selected' ?> value="Anual">Anual</option>
-                        <option <?php if( $getRegistro->getNewPeriodicity() == 'Semestral') echo 'selected' ?> value="Semestral">Semestral</option>
-                        <option <?php if( $getRegistro->getNewPeriodicity() == 'Trimestral') echo 'selected' ?> value="Trimestral">Trimestral</option>
-                        <option <?php if( $getRegistro->getNewPeriodicity() == 'Único') echo 'selected' ?> value="Único">Único</option>
-                    </select>
-
-                </div>
-
-            </div>
-        </div>
+        -->
         
 
-        <div class="col-md-4">
-            <div class="form-group">
-
-                <label>Sexo</label>
-
-                <div class="input-group col-md-12">
-
-                    <select table="registros" field="gender" key="<?= $id ?>" name="last_name" class="form-control md-select">
-
-                        <option></option>
-                        <option <?php if( $getRegistro->getGender() == 'Hombre') echo 'selected' ?> value="M">H</option>
-                        <option <?php if( $getRegistro->getGender() == 'Mujer') echo 'selected' ?> value="F">M</option>
-
-                    </select>
-
-                </div>
-
-            </div>
-        </div>
+        
 
         <div class="clearfix"></div>
         

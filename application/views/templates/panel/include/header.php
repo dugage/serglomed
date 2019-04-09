@@ -4,7 +4,7 @@
 
         <div class="page-logo">
 
-            <a href="#">
+            <a href="<?= base_url('/index.php/') ?>">
 
                 <img style="margin: 17px -5px 0;" width="155" src="<?= base_url('assets/pages/img/logo-big.png') ?>" alt="logo" class="logo-default" /> </a>
             

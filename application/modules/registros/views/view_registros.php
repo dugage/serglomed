@@ -7,7 +7,7 @@
     </div>
 
     <?= $this->load->view('include/page_breadcrumb') ?>
-    
+<!--  
     <?php if( count($getRegsitersDuplicates) > 1 ): ?>
 
         <div class="m-heading-1 border-green m-bordered">
@@ -28,6 +28,8 @@
 
     <?php endif ?>
 
+-->
+
     <div class="row">
 
         <div class="col-md-8">
@@ -40,9 +42,9 @@
                     
                     <form role="form" method="post">
 
-                        <?= $this->load->view('include/form_edit') ?>   
+                        <!-- <?= $this->load->view('include/form_edit') ?>   -->
 
-                       <!-- <?= $this->load->view('include/new_form_edit') ?> -->
+                       <?= $this->load->view('include/new_form_edit') ?>
 
 
                 </div>
