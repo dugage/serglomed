@@ -676,7 +676,7 @@
 
             <div class="form-group col-md-12">
 
-                <button name="submit" class="btn green" type="submit">Guardar</button>
+                <button name="submit" class="btn green" type="submit" id="salto">Guardar</button>
 
             </div>
 
