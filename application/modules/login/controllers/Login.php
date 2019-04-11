@@ -126,12 +126,19 @@ class Login  extends MX_Controller
 
 	public function logout()
     {
-        //obtenemos datos userActivity
-        $activity = $this->doctrine->em->getRepository("Entities\\Useractivity")->findOneBy(["id" => $this->session->userdata('idUserActivity')]);
-        //seteamos los datos
-        //$activity->setTimeout();
-        //guardamos
-        $this->doctrine->em->flush();
+
+        // Comprobamos si la session esta completa (con email y contraseña) o si esta incompleta (solo email)
+        if ($this->session->userdata['login'] == TRUE){
+        
+            //obtenemos datos userActivity
+            $activity = $this->doctrine->em->getRepository("Entities\\Useractivity")->findOneBy(["id" => $this->session->userdata('idUserActivity')]);
+            //seteamos los datos
+            $activity->setTimeout();
+            //guardamos
+            $this->doctrine->em->flush();
+
+        }
+
         //desmontamos las variables de sesión
         $this->session->unset_userdata('logged_in');
         //destruimos la sesión

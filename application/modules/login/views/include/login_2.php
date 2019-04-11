@@ -45,6 +45,10 @@
 
             </div>
 
+            <div style="margin-top: 10px;">
+                <a href="<?= base_url("index.php/login/logout") ?>">Cambiar de Usuario</a>
+            </div>
+
         </form>
 
     </div>
