@@ -537,8 +537,12 @@
 
         <div class="col-md-4">
             <div class="form-group">
+                <?php if (trim($getRegistro->getSelecRies()) == 'TLS'): ?>
+                    <label style="color:red !important;">Selección Médica</label>
+                <?php else: ?>
+                    <label>Selección Médica</label>
+                <?php endif ?>
                 
-                <label <?= (trim($getRegistro->getSelecRies()) == "TSL") ? 'style="color:red !important;"' : '' ?> >Selección Médica</label>
                 
                 <div class="input-group col-md-12">
 
