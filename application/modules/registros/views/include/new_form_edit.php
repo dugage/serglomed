@@ -305,7 +305,7 @@
                         <i class="fa fa-pencil"></i>
                     </span>
 
-                    <input table="registros" field="capital" key="<?= $id ?>" name="capital" value="<?= number_format(intval($getRegistro->getCapital())) ?>" class="form-control md-text" type="text">
+                    <input table="registros" field="capital" key="<?= $id ?>" name="capital" value="<?= number_format(intval($getRegistro->getCapital()), 0, ',', '.') ?>" class="form-control md-text" type="text">
 
                 </div>
 
@@ -323,8 +323,7 @@
                         <i class="fa fa-pencil"></i>
                     </span>
 
-                    <input table="registros" field="prima" key="<?= $id ?>" name="prima" value="<?= number_format(intval($getRegistro->getPrima())) ?>" class="form-control md-text" type="text">
-
+                    <input table="registros" field="prima" key="<?= $id ?>" name="prima" value="<?= number_format(intval($getRegistro->getPrima()), 0, ',', '.') ?>" class="form-control md-text" type="text">
                 </div>
 
             </div>
