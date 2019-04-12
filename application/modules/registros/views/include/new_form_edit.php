@@ -400,7 +400,7 @@
                         <i class="fa fa-pencil"></i>
                     </span>
 
-                    <input table="registros" field="cob_opc1" key="<?= $id ?>" name="cob_opc1" value="<?= $getRegistro->getCobOpc1 () ?>" class="form-control md-text" type="text">
+                    <input table="registros" field="cob_opc1" key="<?= $id ?>" name="cob_opc1" value="<?= $getRegistro->getCobOpc1() ?>" class="form-control md-text" type="text">
 
                 </div>
 
@@ -473,7 +473,7 @@
                         <i class="fa fa-pencil"></i>
                     </span>
 
-                    <input table="registros" field="cob_opc1" key="<?= $id ?>" name="cob_opc1" value="<?= $getRegistro->getCobOpc2() ?>" class="form-control md-text" type="text">
+                    <input table="registros" field="cob_opc1" key="<?= $id ?>" name="cob_opc1" value="<?= $getRegistro->getCobOpc1() ?>" class="form-control md-text" type="text">
 
                 </div>
 
