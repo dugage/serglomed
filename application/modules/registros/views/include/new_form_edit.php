@@ -305,7 +305,7 @@
                         <i class="fa fa-pencil"></i>
                     </span>
 
-                    <input table="registros" field="capital" key="<?= $id ?>" name="capital" value="<?= $getRegistro->getCapital() ?>" class="form-control md-text" type="text">
+                    <input table="registros" field="capital" key="<?= $id ?>" name="capital" value="<?= number_format(intval($getRegistro->getCapital())) ?>" class="form-control md-text" type="text">
 
                 </div>
 
@@ -323,7 +323,7 @@
                         <i class="fa fa-pencil"></i>
                     </span>
 
-                    <input table="registros" field="prima" key="<?= $id ?>" name="prima" value="<?= $getRegistro->getPrima() ?>" class="form-control md-text" type="text">
+                    <input table="registros" field="prima" key="<?= $id ?>" name="prima" value="<?= number_format(intval($getRegistro->getPrima())) ?>" class="form-control md-text" type="text">
 
                 </div>
 
@@ -356,7 +356,7 @@
 
             <div class="form-group">
 
-                <label>Prima OPC1</label>
+                <label style="color:green !important">Prima OPC1</label>
 
                 <div class="input-group col-md-12">
 
@@ -372,7 +372,7 @@
 
             <div class="form-group">
 
-                <label>Ahorro. € OPC1</label>
+                <label style="color:green !important">Ahorro. € OPC1</label>
 
                 <div class="input-group col-md-12">
 
@@ -392,7 +392,7 @@
         <div class="col-md-4">
             <div class="form-group">
 
-                <label>Cob. OPC1</label>
+                <label style="color:green !important">Cob. OPC1</label>
 
                 <div class="input-group col-md-12">
 
@@ -408,7 +408,7 @@
 
             <div class="form-group">
 
-                <label>Ahorro % OPC1</label>
+                <label style="color:green !important">Ahorro % OPC1</label>
 
                 <div class="input-group col-md-12">
 
@@ -430,7 +430,7 @@
         <div class="col-md-4">
             <div class="form-group">
 
-                <label>Prima OPC2</label>
+                <label style="color:orange !important">Prima OPC2</label>
 
                 <div class="input-group col-md-12">
 
@@ -446,7 +446,7 @@
 
             <div class="form-group">
 
-                <label>Ahorro. € OPC2</label>
+                <label style="color:orange !important">Ahorro. € OPC2</label>
 
                 <div class="input-group col-md-12">
 
@@ -465,7 +465,7 @@
         <div class="col-md-4">
             <div class="form-group">
 
-                <label>Cob. OPC2</label>
+                <label style="color:orange !important">Cob. OPC2</label>
 
                 <div class="input-group col-md-12">
 
@@ -481,7 +481,7 @@
 
             <div class="form-group">
 
-                <label>Ahorro % OPC2</label>
+                <label style="color:orange !important">Ahorro % OPC2</label>
 
                 <div class="input-group col-md-12">
 
@@ -537,8 +537,8 @@
 
         <div class="col-md-4">
             <div class="form-group">
-
-                <label>Selección Médica</label>
+                
+                <label <?= (trim($getRegistro->getSelecRies()) == "TSL") ? 'style="color:red !important;"' : '' ?> >Selección Médica</label>
                 
                 <div class="input-group col-md-12">
 
