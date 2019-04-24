@@ -16,3 +16,11 @@
 <?php endif ?>
 
 <script src="<?= base_url('assets/global/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.es.min.js" type="text/javascript') ?>"></script>
+
+<script>
+
+	$(document).ready(function(){
+		$(".list-group-item").first().addClass("active");
+	});
+
+</script>

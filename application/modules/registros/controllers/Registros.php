@@ -433,7 +433,7 @@ class Registros  extends MX_Controller
         //pasamos css para esta página
         $data['css'] = $this->load->view('css_module/css_module','',TRUE);
         //pasamos js para esta página
-        $data['js'] = $this->load->view('js_module/js_module','',TRUE);
+		$data['js'] = $this->load->view('js_module/js_module','',TRUE);
         $data['id'] = $id;
 
         //obtenemos los datos del registro
@@ -504,7 +504,9 @@ class Registros  extends MX_Controller
         //ruta para los botones y acciones
         $data['path'] = $this->uri->segment(1);
         //pasamos el rol del usuario
-        $data['rol'] = $this->rol;
+		$data['rol'] = $this->rol;
+
+		$data['usuarioid'] = $this->usuarioid; 
         //pasamos js para esta página
         $data['js'] = $this->load->view('js_module/js_module','',TRUE);
         //pasamos css para esta página
@@ -523,13 +525,14 @@ class Registros  extends MX_Controller
         $data['getReasons'] = $this->doctrine->em->getRepository("Entities\\Reasons")->findAll();
         //obtenemos la coleccón de templates
         $data['getTemplates'] = $this->doctrine->em->getRepository("Entities\\Templates")->findAll();
-        
+		//Obtenemos las notas que pueda tener el registro
+		$data['getNotes'] =  $this->doctrine->em->getRepository("Entities\\Notes")->findBy(["idregistro" => $id], ["id" => 'DESC']);
         $data['id'] = $id;
 
         //fecha actual más 1
         $data['getNewDate'] = strtotime(date("d-m-Y")."+ 1 days");
         //hora actual más 1
-        $data['getNewHour'] = strtotime(date("G:i")."+ 1 hours");
+		$data['getNewHour'] = strtotime(date("G:i")."+ 1 hours");
 
         /*
         	Ampliamos la funcionalidad para que en caso que los clientes que tengan más de una ficha o servicios,
@@ -977,8 +980,8 @@ class Registros  extends MX_Controller
             $estado = $this->input->post('estadoReg');
             $typeCon = $this->input->post('type');
             $date = $this->input->post('date');
-           //obteenoms el usuario para reasignar
-           $usuario = $this->doctrine->em->find("Entities\\Usuarios", $reasignar);
+			//obteenoms el usuario para reasignar
+			$usuario = $this->doctrine->em->find("Entities\\Usuarios", $reasignar);
 
             $param = array(
 
@@ -1407,7 +1410,38 @@ class Registros  extends MX_Controller
         $this->doctrine->em->getRepository("Entities\\Registros")->softDelete(5);
          //cargamos la vista
         $this->load->view('templates/panel/layout', $data);
-    }
+	}
+	
+	public function add_note(){
+
+		if($this->input->is_ajax_request())
+        {
+
+			$registro = $this->doctrine->em->find("Entities\\Registros",$this->input->post('registro'));
+			$usuario = $this->doctrine->em->find("Entities\\Usuarios",$this->input->post('usuario'));
+
+			$newNote = new Entities\Notes;
+
+			$newNote->setIdregistro($registro);
+			$newNote->setIdusuario($usuario);
+			$newNote->setNote($this->input->post('note'));
+
+			//guardamos la entidad en la tabla registros
+			$this->doctrine->em->persist($newNote);
+			$this->doctrine->em->flush();
+
+			//enviamos el id del registroLlamada
+			$json =  array( 'id' => $newNote->getId(), 
+							'usuario' => $newNote->getIdusuario()->getNombre() . ' ' . $newNote->getIdusuario()->getApellidos(),
+							'fregistro' => $newNote->getFregistro()->format('d/m/Y G:i'),
+							'note' => $newNote->getNote(),
+					);
+			echo json_encode($json);
+		}else{
+
+		}
+
+	}
 
     private function _getField($id,$value = '')
     {

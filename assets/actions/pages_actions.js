@@ -7,7 +7,6 @@ var PagesActions = {
         let viweRegsiterEmail = $("#VIEW-REGISTROS input[name='email']").val();
         if(viweRegsiterEmail != '')
             $("#VIEW-REGISTROS .send-template").show();
-
     },
 
     SendForm : function(){
@@ -79,7 +78,7 @@ var PagesActions = {
 
             var type = 'POST';
             var url = site_url+'/ajax_actions/update_ajax';
-           var data = {'field':field,'table':table,'vl':vl,'id':id,'lang':lang};
+            var data = {'field':field,'table':table,'vl':vl,'id':id,'lang':lang};
             ActionAjax(type,url,data,null,null,false,false);
 
         });
@@ -893,6 +892,42 @@ var PagesActions = {
 
         });
     },
+
+    AddNote : function(){
+
+        $("#form-notes").submit(function(e){
+            e.preventDefault();
+            var nota = $("#note").val();
+            var registro = $("#note").data("registro");
+            var usuario = $("#note").data("usuario");
+
+            if (nota.length >  0){
+
+                var type = 'POST';
+                var url = site_url+'/registros/add_note';
+                var data = {'note':nota,'registro':registro,'usuario':usuario};
+                var returndata = ActionAjax(type,url,data,null,null,true,false);
+                result = JSON.parse(returndata);
+                $(".list-group-item").first().removeClass("active");
+                $("#note").val("");
+
+                var addNote = "";
+                addNote += '<a href="#" class="list-group-item list-group-item-action active">',
+                addNote += '<div class="d-flex w-100 justify-content-between">';
+                addNote += '<h5 class="mb-1">'+result.usuario+'</h5>';
+                addNote += '</div>';
+                addNote += '<p style="margin:8px 0px;">'+result.note+'</p>';
+                addNote += '<small>'+result.fregistro+'</small>';
+                addNote += '</a>';
+
+                $("#notas").prepend(addNote);
+				
+            }else{
+                alert("El campo de texto no puede estar vacío.");
+            }
+            
+        });
+    },
 }
 function foldMenu(){
 
@@ -912,6 +947,7 @@ function unfoldMenu(){
 }
 
 $(window).load(PagesActions.Start);
+$(window).load(PagesActions.AddNote);
 $(window).load(PagesActions.OpenFileW);
 $(window).load(PagesActions.CheckAction);
 $(window).load(PagesActions.SelectAction);
@@ -938,3 +974,4 @@ $(window).load(PagesActions.CheckRequired);
 $(window).load(PagesActions.GetArgumentario);
 $(window).load(PagesActions.SoftDelete);
 $(window).load(PagesActions.SendInfo);
+
