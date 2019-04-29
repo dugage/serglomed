@@ -928,6 +928,30 @@ var PagesActions = {
             
         });
     },
+
+    UpdateClient : function(){
+
+        $( "#updateClient" ).submit(function(e) {
+            e.preventDefault();
+            $("#updateClient button").attr("disabled", "disabled").text("Actualizando ...");
+            var type = 'POST';
+            var id = $(this).data("id");
+            var url = site_url+'/registros/edit/'+id;
+            var data = $(this).serialize();
+            var returndata = ActionAjax(type,url,data,null,null,true,false);
+            //result = JSON.parse(returndata);
+            if (returndata){
+                $("#actualizado").slideDown();
+                $("#updateClient button").removeAttr("disabled").text("Actualizar Datos");
+            }else{
+                $("#updateClient button").removeAttr("disabled").text("Actualizar Datos");
+            }
+            //console.log( $( this ).serialize() );
+            
+
+        });
+
+    },
 }
 function foldMenu(){
 
@@ -948,6 +972,7 @@ function unfoldMenu(){
 
 $(window).load(PagesActions.Start);
 $(window).load(PagesActions.AddNote);
+$(window).load(PagesActions.UpdateClient);
 $(window).load(PagesActions.OpenFileW);
 $(window).load(PagesActions.CheckAction);
 $(window).load(PagesActions.SelectAction);

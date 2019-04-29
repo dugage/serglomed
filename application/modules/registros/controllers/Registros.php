@@ -445,6 +445,49 @@ class Registros  extends MX_Controller
         //formulario secundario
         $data['secondForm'] = $this->_getFormByData($data['getRegistro']->getCampaign()->getId(),$id);
 
+		if($this->input->is_ajax_request())
+        {
+			//validamos los datos
+			$this->form_validation->set_rules('periodicity', 'Periodicidad', '');
+			
+            if($this->form_validation->run()){
+
+				$data['getRegistro']->setDocumentNumber($this->input->post('document_number'));
+				$data['getRegistro']->setName($this->input->post('name'));
+				$data['getRegistro']->setFirstName($this->input->post('first_name'));
+				$data['getRegistro']->setLastName($this->input->post('last_name'));
+				$data['getRegistro']->setModality($this->input->post('modality'));
+				$data['getRegistro']->setPeriodicity($this->input->post('periodicity'));
+				$data['getRegistro']->setNewPeriodicity($this->input->post('new_periodicity'));
+				$data['getRegistro']->setRenovation(new \DateTime($this->input->post('renovation')));
+				$data['getRegistro']->setCheckingAccount($this->encryption->encrypt($this->input->post('checking_account')));
+				$data['getRegistro']->setPrima($this->input->post('prima'));
+				$data['getRegistro']->setCapital($this->input->post('capital'));
+				$data['getRegistro']->setTelephone($this->input->post('telephone'));
+				$data['getRegistro']->setWay('');
+				$data['getRegistro']->setAddress($this->input->post('address'));
+				$data['getRegistro']->setCity($this->input->post('city'));
+				$data['getRegistro']->setZip($this->input->post('zip'));
+				$data['getRegistro']->setProvince($this->input->post('province'));
+				$data['getRegistro']->setGender($this->input->post('gender'));
+				$data['getRegistro']->setBirdDate(new \DateTime($this->input->post('bird_date')));
+				$data['getRegistro']->setAge($this->input->post('age'));
+				$data['getRegistro']->setActualCob($this->input->post('actual_cob'));
+				$data['getRegistro']->setPrimaOpc1($this->input->post('prima_opc1'));
+				$data['getRegistro']->setCobOpc1($this->input->post('cob_opc1'));
+				$data['getRegistro']->setAhorroeuOpc1($this->input->post('ahorroeu_opc1'));
+				$data['getRegistro']->setAhorropercentOpc1($this->input->post('ahorropercent_opc1'));
+				$data['getRegistro']->setPrimaOpc2($this->input->post('prima_opc2'));
+				$data['getRegistro']->setAhorroeuOpc2($this->input->post('ahorroeu_opc2'));
+				$data['getRegistro']->setAhorropercentOpc2($this->input->post('ahorropercent_opc2'));
+				//guardamos la entidad en la tabla registros
+				$this->doctrine->em->flush();
+
+				echo "true";
+			}
+
+		}
+
         //comprobamos formulario submit
         if (isset($_POST['submit']))
         {
@@ -479,8 +522,9 @@ class Registros  extends MX_Controller
                 //actualizamos
                 $this->doctrine->em->flush();
 
+
             }
-        }
+		}
 
         //cargamos la vista
         $this->load->view('templates/panel/layout', $data);

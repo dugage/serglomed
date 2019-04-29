@@ -1,19 +1,5 @@
-    <style type="text/css">
-        label{
-            font-size: 12px;
-        }
-        .input-group .form-control{
-            font-weight: bold;
-        }
-
-        .col-md-4, .col-md-8{
-            padding-left: 5px;
-            padding-right: 5px;
-        }
-
-    </style>
-    <?= validation_errors(); ?>
-
+<?= validation_errors(); ?>
+<form id="updateClient" role="form" method="post" data-id="<?= $id ?>" >
     <div class="row">
         <div class="col-md-4">
 
@@ -654,11 +640,17 @@
         </div>
                 
         -->
-        
 
-        
-
-        <div class="clearfix"></div>
+		<div class="col-md-3">
+			<button class="btn green" type="submit">Actualizar Datos</button>
+		</div>
+		<div class="clearfix"></div>
+		<br>
+		<div class="col-md-12">
+		<div class="alert alert-success" id="actualizado" role="alert" style="background: transparent;display:none;">
+			Cliente actualizado correctamente.
+		</div>
+		</div>
         
     </div>
     

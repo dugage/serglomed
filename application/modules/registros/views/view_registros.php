@@ -39,10 +39,6 @@
                 <?= $this->load->view('include/portlet_title') ?>
 
                 <div class="portlet-body flip-scroll">
-                    
-                    <form role="form" method="post">
-
-                        <!-- <?= $this->load->view('include/form_edit') ?>   -->
 
                        <?= $this->load->view('include/new_form_edit') ?>
 
@@ -113,7 +109,6 @@
 </div>
 
 <?= $this->load->view('include/modals/registrosllamadas_modal') ?>
-<!-- <?= $this->load->view('include/modals/argumentario_modal') ?> -->
 <?= $this->load->view('include/modals/send_info_modal') ?>
 
 		
