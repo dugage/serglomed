@@ -2,22 +2,47 @@
 <form id="updateClient" role="form" method="post" data-id="<?= $id ?>" >
     <div class="row">
         <div class="col-md-4">
+			<?php if($rol == 4): ?>
+				<div class="form-group">
 
-            <div class="form-group">
+					<label>Fecha de Registro</label>
 
-                <label>Fecha de Registro</label>
+					<div class="input-group col-md-12">
 
-                <div class="input-group col-md-12">
+						<span class="input-group-addon">
+							<i class="fa fa-calendar"></i>
+						</span>
 
-                    <span class="input-group-addon">
-                        <i class="fa fa-calendar"></i>
-                    </span>
+						<input name="fregistro" value="<?= $getRegistro->getFregistro()->format('d/m/Y') ?>" class="form-control" type="text" disabled>
 
-                    <input name="fregistro" value="<?= $getRegistro->getFregistro()->format('d/m/Y') ?>" class="form-control md-text" type="text" disabled>
+					</div>
 
-                </div>
+				</div>
 
-            </div>
+			<?php else: ?>
+
+				<div class="form-group">
+				
+					<label>Fecha de Registro</label>
+					<div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-week-start="1" data-date-language="es">
+
+						<input name="fregistro" value="<?= $getRegistro->getFregistro()->format('d-m-Y') ?>" type="text" class="form-control" readonly>
+
+						<span class="input-group-btn">
+
+							<button class="btn default" type="button">
+
+								<i class="fa fa-calendar"></i>
+
+							</button>
+
+						</span>
+
+					</div>
+
+				</div>
+
+			<?php endif ?>
         </div>
         <div class="col-md-4">
             <div class="form-group">
@@ -32,22 +57,40 @@
 
             </div>
         </div>
-        <div class="col-md-4"> 
-            <div class="form-group">
-                
-                <label>Operario</label>
+        <div class="col-md-4">
+			<?php if($rol  != 4): ?>
+				<div class="form-group">
 
-                <div class="input-group col-md-12">
+					<label>Operario</label>
 
-                    <span class="input-group-addon">
-                        <i class="fa fa-pencil"></i>
-                    </span>
+					<select table="registros" field="idUsuario" key="<?= $id ?>" name="usuario" class="form-control md-select">
 
-                    <input table="registros" field="name" key="<?= $id ?>" name="name" value="<?= $getRegistro->getidUsuario()->getNombre() ?> <?= $getRegistro->getidUsuario()->getApellidos() ?>" class="form-control md-text" type="text" disabled>
+						<?php foreach($getUsuarios as $usuario): ?>
 
-                </div>
+							<option <?php if($getRegistro->getIdusuario()->getId() == $usuario->getId()) echo 'selected' ?> value="<?= $usuario->getId() ?>"><?= $usuario->getNombre() ?> <?= $usuario->getApellidos() ?></option>
 
-            </div>  
+						<?php endforeach ?>
+
+					</select>
+
+				</div>
+			<?php else: ?>
+				<div class="form-group">
+					
+					<label>Operario</label>
+
+					<div class="input-group col-md-12">
+
+						<span class="input-group-addon">
+							<i class="fa fa-pencil"></i>
+						</span>
+
+						<input table="registros" field="name" key="<?= $id ?>" name="usuario" value="<?= $getRegistro->getidUsuario()->getNombre() ?> <?= $getRegistro->getidUsuario()->getApellidos() ?>" class="form-control md-text" type="text" disabled>
+
+					</div>
+
+				</div>  
+			<?php endif ?>
         </div>
 
         <div class="clearfix"></div>
@@ -642,7 +685,7 @@
         -->
 
 		<div class="col-md-3">
-			<button class="btn green" type="submit">Actualizar Datos</button>
+			<button class="btn green actualizar-datos" type="submit">Actualizar Datos</button>
 		</div>
 		<div class="clearfix"></div>
 		<br>

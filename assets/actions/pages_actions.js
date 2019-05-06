@@ -933,7 +933,7 @@ var PagesActions = {
 
         $( "#updateClient" ).submit(function(e) {
             e.preventDefault();
-            $("#updateClient button").attr("disabled", "disabled").text("Actualizando ...");
+            $("#updateClient button.actualizar-datos").attr("disabled", "disabled").text("Actualizando ...");
             var type = 'POST';
             var id = $(this).data("id");
             var url = site_url+'/registros/edit/'+id;
@@ -942,9 +942,9 @@ var PagesActions = {
             //result = JSON.parse(returndata);
             if (returndata){
                 $("#actualizado").slideDown();
-                $("#updateClient button").removeAttr("disabled").text("Actualizar Datos");
+                $("#updateClient button.actualizar-datos").removeAttr("disabled").text("Actualizar Datos");
             }else{
-                $("#updateClient button").removeAttr("disabled").text("Actualizar Datos");
+                $("#updateClient button.actualizar-datos").removeAttr("disabled").text("Actualizar Datos");
             }
             //console.log( $( this ).serialize() );
             

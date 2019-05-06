@@ -449,6 +449,9 @@ class Registros  extends MX_Controller
         {
 			//validamos los datos
 			$this->form_validation->set_rules('periodicity', 'Periodicidad', '');
+
+			//obtenemos el usuario seleccionado
+            $usuario = $this->doctrine->em->find("Entities\\Usuarios", $this->input->post('usuario'));
 			
             if($this->form_validation->run()){
 
@@ -480,6 +483,10 @@ class Registros  extends MX_Controller
 				$data['getRegistro']->setPrimaOpc2($this->input->post('prima_opc2'));
 				$data['getRegistro']->setAhorroeuOpc2($this->input->post('ahorroeu_opc2'));
 				$data['getRegistro']->setAhorropercentOpc2($this->input->post('ahorropercent_opc2'));
+				$data['getRegistro']->setIdusuario($usuario);
+				$data['getRegistro']->setFregistro(new \DateTime(formatDateDoct($this->input->post('fregistro'))));
+
+
 				//guardamos la entidad en la tabla registros
 				$this->doctrine->em->flush();
 
@@ -571,7 +578,9 @@ class Registros  extends MX_Controller
         $data['getTemplates'] = $this->doctrine->em->getRepository("Entities\\Templates")->findAll();
 		//Obtenemos las notas que pueda tener el registro
 		$data['getNotes'] =  $this->doctrine->em->getRepository("Entities\\Notes")->findBy(["idregistro" => $id], ["id" => 'DESC']);
-        $data['id'] = $id;
+		$data['id'] = $id;
+		//obtenemos todos los uausrios con rol teleoperador/a = 4
+        $data['getUsuarios'] = $this->doctrine->em->getRepository("Entities\\Usuarios")->findBy(["idrol" => 4,"estado" => 0]);
 
         //fecha actual más 1
         $data['getNewDate'] = strtotime(date("d-m-Y")."+ 1 days");
@@ -645,7 +654,7 @@ class Registros  extends MX_Controller
 		    		if($key > 0)
 		            {
 		            	//hacemos un explode y convertimos la línea del csv en un vector
-		            	$registro = explode(",", $value);
+		            	$registro = explode(";", $value);
 		            	//lo primero, obtenemos la campaña y el teleoperador y el estao 4 = sin estado
 		            	$campaign = $this->doctrine->em->find("Entities\\Campaigns", $registro[28]);
 		            	$user = $this->doctrine->em->find("Entities\\Usuarios", $registro[29]);
@@ -654,7 +663,8 @@ class Registros  extends MX_Controller
 		            	$newReg = new Entities\Registros;
 		            	//seteamos los datos
 		            	$newReg->setCampaign($campaign);
-		            	$newReg->setIdusuario($user);
+                        $newReg->setIdusuario($user);
+            
 		            	$newReg->setIdestado($estado);
 
 		            	$newReg->setDocumentNumber($registro[0]);
@@ -665,12 +675,23 @@ class Registros  extends MX_Controller
 		            	$newReg->setPeriodicity($registro[5]);
 		            	$newReg->setNewPeriodicity($registro[6]);
 
-                        echo $registro[8]. "<br>";
+                        //echo $registro[8]. "<br>";
 		            	$newReg->setRenovation(new \DateTime($registro[7]));
-		            	$newReg->setCheckingAccount($this->encryption->encrypt($registro[8]));
-		            	$newReg->setPrima($registro[9]);
+						$newReg->setCheckingAccount($this->encryption->encrypt($registro[8]));
+						//echo $registro[8];
+						//$prima = number_format($registro[9], 2, '.', '');
+						$prima = $registro[9];
+						//echo $prima;
+						$telefono = $registro[11];
+						if(strlen($telefono) > 9) {
+							$telefono = substr($telefono, strlen($telefono) - 9);
+						}
+						
+						//echo $telefono;
+						//die();
+						$newReg->setPrima($prima);
 		            	$newReg->setCapital($registro[10]);
-		            	$newReg->setTelephone($registro[11]);
+		            	$newReg->setTelephone($telefono);
 		            	$newReg->setWay($registro[12]);
 		            	$newReg->setAddress($registro[13]);
 		            	$newReg->setCity($registro[14]);
@@ -679,22 +700,36 @@ class Registros  extends MX_Controller
 		            	$newReg->setGender($registro[17]);
 		            	$newReg->setBirdDate(new \DateTime($registro[18]));
 		            	$newReg->setAge($registro[19]);
-		            	$newReg->setActualCob($registro[20]);
-		            	$newReg->setPrimaOpc1($registro[21]);
-		            	$newReg->setCobOpc1($registro[22]);
-		            	$newReg->setAhorroeuOpc1($registro[23]);
-		            	$newReg->setAhorropercentOpc1($registro[24]);
-		            	$newReg->setPrimaOpc2($registro[25]);
+						$newReg->setActualCob($registro[20]);
+
+						$primaOpc1 = $registro[21];
+		            	$newReg->setPrimaOpc1($primaOpc1);
+						$newReg->setCobOpc1($registro[22]);
+
+						$ahorroEuOpc1 = $registro[23];
+		            	$newReg->setAhorroeuOpc1($ahorroEuOpc1);
+						$newReg->setAhorropercentOpc1($registro[24]);
+
+						$primaOpc2 = $registro[25];
+		            	$newReg->setPrimaOpc2($primaOpc2);
 		            	$newReg->setAhorroeuOpc2($registro[26]);
-		            	$newReg->setAhorropercentOpc2($registro[27]);
+						$newReg->setAhorropercentOpc2($registro[27]);
+						
+						$newReg->setFregistro(new \DateTime("now"));
+						$newReg->setTregistro(0.00);
 		            	//guardamos la entidad en la tabla registros
-		                $this->doctrine->em->persist($newReg);
-		                $this->doctrine->em->flush();
-		                //redi al listado
-		                redirect($this->uri->segment(1));
+		                
+							//guardamos la entidad en la tabla registros
+							$this->doctrine->em->persist($newReg);
+							$this->doctrine->em->flush();
 		            	
 		            }
-	    		}
+				}
+				
+				
+
+				//redireccionamos al index
+                redirect($this->uri->segment(1));
 
             }
 	    	
@@ -762,7 +797,7 @@ class Registros  extends MX_Controller
                             //si el campo es mayor de 9 caracteres, eliminamos los tres primeros
                             if(strlen($telefono) > 9)
                             {
-                                $telefono = substr($telefono, strlen($telefono) - 9);
+								$telefono = substr($telefono, strlen($telefono) - 9);
                             }
                             
                             $reg->setTelefono($telefono);
