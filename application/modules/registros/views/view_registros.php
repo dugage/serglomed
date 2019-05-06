@@ -36,6 +36,21 @@
 
             <div class="portlet light bordered">
 
+				<?php if($rol != 4) : ?>
+
+					<div style="float: right;" class="checkbox">
+
+						<div class="form-check form-check-inline">
+							<input class="form-check-input md-check" multi="false" field="oculto" table="Registros" key="<?= $getRegistro->getId() ?>" <?php if($getRegistro->getOculto() == 1) echo 'checked' ?> type="checkbox" id="inlineCheckbox1" value="option1">
+							<label class="form-check-label" for="inlineCheckbox1"><strong>OCULTO</strong></label>
+						</div>
+
+					</div>
+
+				<?php endif; ?>
+
+				
+
                 <?= $this->load->view('include/portlet_title') ?>
 
                 <div class="portlet-body flip-scroll">

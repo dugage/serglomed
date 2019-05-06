@@ -998,7 +998,7 @@ class Registros  extends MX_Controller
             //consultamos si los registros llamadas con estado = 5
             //si el count es >= 2 seteamos oculto = 1
             $recordCallEstado = $this->doctrine->em->getRepository("Entities\\Registrollamadas")->findBy(["idresgistro" => $id1,"idestado" => 5]);
-            if(count($recordCallEstado) >= 2)
+            if(count($recordCallEstado) >= 20)
             {
 
                 $record->setOculto(1);
