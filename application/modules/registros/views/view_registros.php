@@ -48,40 +48,41 @@
             </div>
 
         </div>
+		<?php if($rol != 1): ?>
+			<div class="col-md-4">
 
-        <div class="col-md-4">
+				<div class="portlet light bordered">
 
-            <div class="portlet light bordered">
+					<div class="portlet-title">
 
-                <div class="portlet-title">
+						<button id="btn-chronometre" data-user="<?= $getRegistro->getIdusuario()->getId() ?>" data-record="<?= $getRegistro->getId() ?>" style="width: 100%" class="btn grey-mint start" type="button"><i class=" icon-call-end "></i> Comenzar llamada</button>
 
-                    <button id="btn-chronometre" data-user="<?= $getRegistro->getIdusuario()->getId() ?>" data-record="<?= $getRegistro->getId() ?>" style="width: 100%" class="btn grey-mint start" type="button"><i class=" icon-call-end "></i> Comenzar llamada</button>
+					</div>
 
-                </div>
+					<div class="portlet-body flip-scroll">
 
-                <div class="portlet-body flip-scroll">
+						<?= $this->load->view('include/right_view') ?>
 
-                    <?= $this->load->view('include/right_view') ?>
+					</div>
 
-                </div>
+					<div class="portlet-footer">
+						<hr/>
+						<a href="<?= site_url('login/timeout') ?>" style="width: 100%" class="btn green" ><i class="fa fa-coffee" aria-hidden="true"></i> Descanso</a>
 
-                <div class="portlet-footer">
-                    <hr/>
-                    <a href="<?= site_url('login/timeout') ?>" style="width: 100%" class="btn green" ><i class="fa fa-coffee" aria-hidden="true"></i> Descanso</a>
+					</div>
 
-                </div>
-
-            </div>
+				</div>
 
 
-            <div class="portlet light bordered" id="modalArgumentario">
-                <div class="portlet-title" id="argumentarioTitle"><h4>Argumentario</h4></div>
-                <div class="portlet-body flip-scroll" id="argumentarioBody">
-                    Cuerpo del argumentario
-                </div>
+				<div class="portlet light bordered" id="modalArgumentario">
+					<div class="portlet-title" id="argumentarioTitle"><h4>Argumentario</h4></div>
+					<div class="portlet-body flip-scroll" id="argumentarioBody">
+						Cuerpo del argumentario
+					</div>
 
-            </div>
-        </div>
+				</div>
+			</div>
+		<?php endif ?>
 
 		<?= $this->load->view('include/form_notes') ?>
 

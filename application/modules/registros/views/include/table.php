@@ -31,9 +31,10 @@
                     <?php if($rol == 1): ?>
 
                         <td>
-                            <a title="Editar" href="<?= site_url($path.'/edit/'.$result->getId()) ?>" class="btn yellow" type="button"><i class=" icon-pencil "></i></a>
+                            <!-- <a title="Editar" href="<?= site_url($path.'/edit/'.$result->getId()) ?>" class="btn yellow" type="button"><i class=" icon-pencil "></i></a> -->
                             <!--<a title="Eliminar" href="<?= site_url($path.'/delete/'.$result->getId()) ?>" class="btn red" type="button"><i class="icon-trash "></i></a>-->
-                        </td>
+							<a title="Editar" href="<?= site_url($path.'/view/'.$result->getId()) ?>" class="btn yellow" type="button"><i class=" icon-pencil "></i></a>
+						</td>
 
                     <?php elseif($rol == 4): ?>
 
