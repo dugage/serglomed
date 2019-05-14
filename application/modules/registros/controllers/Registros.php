@@ -60,7 +60,10 @@ class Registros  extends MX_Controller
         //lista migas pan
         $data['breadcrumb'] = array($this->nameClass);
         //datos cabecera tabla
-        $data['thead'] = array('ID','Nombre','Teléfono','DNI','TP');
+		$data['thead'] = array('ID','Nombre','Teléfono','DNI','TP');
+		if($this->rol != 4){
+			array_push($data['thead'],'Estado');
+		}
         //lista de parametros de busqueda del select del buscador
         $data['searcher'] = array('Nombre' => 'name' ,'Apellido' => 'firstName','Teléfono' => 'telephone','DNI' => 'documentNumber');
         //cadena add url paginación

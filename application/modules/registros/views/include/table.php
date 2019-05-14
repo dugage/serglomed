@@ -3,7 +3,13 @@
     <thead class="flip-content">
     <tr>
         <?php foreach ($thead as $th): ?>
-            <th width="20%"> <?= $th ?> </th>
+
+			<?php if ($th == 'ID'): ?>
+				<th width="10%"> <?= $th ?> </th>
+			<?php else: ?>
+				<th width="20%"> <?= $th ?> </th>
+			<?php endif; ?>
+
         <?php endforeach ?>
         <th width="20%">Acciones</th>
     </tr>
@@ -24,6 +30,7 @@
                     <?php if($rol != 4): ?>
 
                         <td> <?= $result->getIdusuario()->getNombre() ?> <?= $result->getIdusuario()->getApellidos() ?> </td>
+						<td> <?= ($result->getOculto() != 0) ? 'Oculto':'Activo' ?> </td>
 
                     <?php endif ?>
 

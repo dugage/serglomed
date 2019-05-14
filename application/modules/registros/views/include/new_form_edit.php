@@ -700,7 +700,6 @@
 
 </form>
 
-<?php if( $rol == 4): ?>
     
 <hr/>
 
@@ -723,5 +722,3 @@
     </div>
 
 </form>
-
-<?php endif ?>
