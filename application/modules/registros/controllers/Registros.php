@@ -452,6 +452,7 @@ class Registros  extends MX_Controller
         {
 			//validamos los datos
 			$this->form_validation->set_rules('periodicity', 'Periodicidad', '');
+			$this->form_validation->set_rules('telephoneAlt', 'Móvil', '');
 
 			//obtenemos el usuario seleccionado
             $usuario = $this->doctrine->em->find("Entities\\Usuarios", $this->input->post('usuario'));
