@@ -456,45 +456,45 @@ class Registros  extends MX_Controller
 			//obtenemos el usuario seleccionado
             $usuario = $this->doctrine->em->find("Entities\\Usuarios", $this->input->post('usuario'));
 			
-            if($this->form_validation->run()){
+			$data['getRegistro']->setDocumentNumber($this->input->post('document_number'));
+			$data['getRegistro']->setName($this->input->post('name'));
+			$data['getRegistro']->setFirstName($this->input->post('first_name'));
+			$data['getRegistro']->setLastName('');
+			$data['getRegistro']->setModality($this->input->post('modality'));
+			$data['getRegistro']->setPeriodicity($this->input->post('periodicity'));
+			$data['getRegistro']->setNewPeriodicity($this->input->post('new_periodicity'));
+			$data['getRegistro']->setRenovation(new \DateTime(formatDateDoct($this->input->post('renovation'))));
+			$data['getRegistro']->setCheckingAccount($this->encryption->encrypt($this->input->post('checking_account')));
+			$data['getRegistro']->setPrima($this->input->post('prima'));
+			$data['getRegistro']->setCapital($this->input->post('capital'));
+			$data['getRegistro']->setTelephone($this->input->post('telephone'));
+			$data['getRegistro']->setTelephoneAlt($this->input->post('telephoneAlt'));
+			$data['getRegistro']->setWay('');
+			$data['getRegistro']->setAddress($this->input->post('address'));
+			$data['getRegistro']->setCity($this->input->post('city'));
+			$data['getRegistro']->setZip($this->input->post('zip'));
+			$data['getRegistro']->setProvince($this->input->post('province'));
+			$data['getRegistro']->setGender($this->input->post('gender'));
+			$data['getRegistro']->setBirdDate(new \DateTime(formatDateDoct($this->input->post('bird_date'))));
+			$data['getRegistro']->setAge($this->input->post('age'));
+			$data['getRegistro']->setActualCob($this->input->post('actual_cob'));
+			$data['getRegistro']->setPrimaOpc1($this->input->post('prima_opc1'));
+			$data['getRegistro']->setCobOpc1($this->input->post('cob_opc1'));
+			$data['getRegistro']->setAhorroeuOpc1($this->input->post('ahorroeu_opc1'));
+			$data['getRegistro']->setAhorropercentOpc1($this->input->post('ahorropercent_opc1'));
+			$data['getRegistro']->setPrimaOpc2($this->input->post('prima_opc2'));
+			$data['getRegistro']->setAhorroeuOpc2($this->input->post('ahorroeu_opc2'));
+			$data['getRegistro']->setAhorropercentOpc2($this->input->post('ahorropercent_opc2'));
+			//guardamos la entidad en la tabla registros
+			$this->doctrine->em->flush();
 
-				$data['getRegistro']->setDocumentNumber($this->input->post('document_number'));
-				$data['getRegistro']->setName($this->input->post('name'));
-				$data['getRegistro']->setFirstName($this->input->post('first_name'));
-				$data['getRegistro']->setLastName($this->input->post('last_name'));
-				$data['getRegistro']->setModality($this->input->post('modality'));
-				$data['getRegistro']->setPeriodicity($this->input->post('periodicity'));
-				$data['getRegistro']->setNewPeriodicity($this->input->post('new_periodicity'));
-				$data['getRegistro']->setRenovation(new \DateTime($this->input->post('renovation')));
-				$data['getRegistro']->setCheckingAccount($this->encryption->encrypt($this->input->post('checking_account')));
-				$data['getRegistro']->setPrima($this->input->post('prima'));
-				$data['getRegistro']->setCapital($this->input->post('capital'));
-				$data['getRegistro']->setTelephone($this->input->post('telephone'));
-				$data['getRegistro']->setWay('');
-				$data['getRegistro']->setAddress($this->input->post('address'));
-				$data['getRegistro']->setCity($this->input->post('city'));
-				$data['getRegistro']->setZip($this->input->post('zip'));
-				$data['getRegistro']->setProvince($this->input->post('province'));
-				$data['getRegistro']->setGender($this->input->post('gender'));
-				$data['getRegistro']->setBirdDate(new \DateTime($this->input->post('bird_date')));
-				$data['getRegistro']->setAge($this->input->post('age'));
-				$data['getRegistro']->setActualCob($this->input->post('actual_cob'));
-				$data['getRegistro']->setPrimaOpc1($this->input->post('prima_opc1'));
-				$data['getRegistro']->setCobOpc1($this->input->post('cob_opc1'));
-				$data['getRegistro']->setAhorroeuOpc1($this->input->post('ahorroeu_opc1'));
-				$data['getRegistro']->setAhorropercentOpc1($this->input->post('ahorropercent_opc1'));
-				$data['getRegistro']->setPrimaOpc2($this->input->post('prima_opc2'));
-				$data['getRegistro']->setAhorroeuOpc2($this->input->post('ahorroeu_opc2'));
-				$data['getRegistro']->setAhorropercentOpc2($this->input->post('ahorropercent_opc2'));
-				$data['getRegistro']->setIdusuario($usuario);
-				$data['getRegistro']->setFregistro(new \DateTime(formatDateDoct($this->input->post('fregistro'))));
-
-
-				//guardamos la entidad en la tabla registros
-				$this->doctrine->em->flush();
-
-				echo "true";
-			}
+			//enviamos el id del registroLlamada
+			$json =  array( 'id' => $data['getRegistro']->getId(), 
+							'usuario' => $data['getRegistro']->getIdusuario()->getNombre() . ' ' . $data['getRegistro']->getIdusuario()->getApellidos(),
+							'fregistro' => $data['getRegistro']->getFregistro()->format('d/m/Y G:i'),
+							
+					);
+			echo json_encode($json);
 
 		}
 
