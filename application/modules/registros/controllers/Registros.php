@@ -469,7 +469,9 @@ class Registros  extends MX_Controller
 			$data['getRegistro']->setPrima($this->input->post('prima'));
 			$data['getRegistro']->setCapital($this->input->post('capital'));
 			$data['getRegistro']->setTelephone($this->input->post('telephone'));
-			$data['getRegistro']->setTelephoneAlt($this->input->post('telephoneAlt'));
+			if($this->input->post('telephoneAlt') != "") {
+				$data['getRegistro']->setTelephoneAlt($this->input->post('telephoneAlt'));
+			}
 			$data['getRegistro']->setWay('');
 			$data['getRegistro']->setAddress($this->input->post('address'));
 			$data['getRegistro']->setCity($this->input->post('city'));
