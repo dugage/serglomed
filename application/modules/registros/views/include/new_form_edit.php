@@ -13,7 +13,7 @@
 							<i class="fa fa-calendar"></i>
 						</span>
 
-						<input name="fregistro" value="<?= $getRegistro->getFregistro()->format('d/m/Y') ?>" class="form-control" type="text" disabled>
+						<input name="fregistro" value="<?= $getRegistro->getFregistro()->format('d/m/Y') ?>" class="form-control" type="text" readonly>
 
 					</div>
 
@@ -51,7 +51,7 @@
 
                 <div class="input-group col-md-12">
 
-                    <input disabled name="name" value="<?= $getRegistro->getCampaign()->getName() ?>" class="form-control md-text" type="text">
+                    <input readonly name="campaign" value="<?= $getRegistro->getCampaign()->getName() ?>" class="form-control" type="text">
 
                 </div>
 
@@ -63,7 +63,7 @@
 
 					<label>Operario</label>
 
-					<select table="registros" field="idUsuario" key="<?= $id ?>" name="usuario" class="form-control md-select">
+					<select name="usuario" class="form-control">
 
 						<?php foreach($getUsuarios as $usuario): ?>
 
@@ -85,7 +85,7 @@
 							<i class="fa fa-pencil"></i>
 						</span>
 
-						<input table="registros" field="name" key="<?= $id ?>" name="usuario" value="<?= $getRegistro->getidUsuario()->getNombre() ?> <?= $getRegistro->getidUsuario()->getApellidos() ?>" class="form-control md-text" type="text" disabled>
+						<input name="usuario" value="<?= $getRegistro->getidUsuario()->getNombre() ?> <?= $getRegistro->getidUsuario()->getApellidos() ?>" class="form-control" type="text" readonly>
 
 					</div>
 
@@ -106,7 +106,7 @@
                         <i class="fa fa-pencil"></i>
                     </span>
 
-                    <input table="registros" field="name" key="<?= $id ?>" name="name" value="<?= $getRegistro->getName() ?>" class="form-control md-text" type="text">
+                    <input name="name" value="<?= $getRegistro->getName() ?>" class="form-control" type="text">
 
                 </div>
 
@@ -123,7 +123,7 @@
                         <i class="fa fa-pencil"></i>
                     </span>
 
-                    <input table="registros" field="first_name" key="<?= $id ?>" name="first_name" value="<?= $getRegistro->getFirstName() ?> <?= $getRegistro->getLastName() ?>" class="form-control md-text" type="text">
+                    <input name="first_name" value="<?= $getRegistro->getFirstName() ?> <?= $getRegistro->getLastName() ?>" class="form-control" type="text">
 
                 </div>
 
@@ -141,7 +141,7 @@
                         <i class="fa fa-pencil"></i>
                     </span>
 
-                    <input table="registros" field="document_number" key="<?= $id ?>" name="document_number" value="<?= $getRegistro->getDocumentNumber() ?>" class="form-control md-text" type="text">
+                    <input name="document_number" value="<?= $getRegistro->getDocumentNumber() ?>" class="form-control" type="text">
 
                 </div>
 
@@ -159,7 +159,7 @@
                         <i class="fa fa-calendar"></i>
                     </span>
 
-                    <input table="registros" field="bird_date" key="<?= $id ?>" name="bird_date" value="<?= $getRegistro->getBirdDate()->format('d/m/Y') ?>" class="form-control md-text" type="text">
+                    <input name="bird_date" value="<?= $getRegistro->getBirdDate()->format('d/m/Y') ?>" class="form-control" type="text">
 
                 </div>
 
@@ -177,7 +177,7 @@
                         <i class="fa fa-pencil"></i>
                     </span>
 
-                    <input table="registros" field="modality" key="<?= $id ?>" name="age" class="form-control md-text age" value="<?= $getRegistro->getAge() ?>" type="text">
+                    <input name="age" class="form-control age" value="<?= $getRegistro->getAge() ?>" type="text">
 
                 </div>
 
@@ -191,7 +191,7 @@
 
                 <div class="input-group col-md-12">
 
-                    <select table="registros" field="gender" key="<?= $id ?>" name="last_name" class="form-control md-select">
+                    <select name="gender" class="form-control">
 
                         <option></option>
                         <option <?php if( $getRegistro->getGender() == 'Hombre') echo 'selected' ?> value="M">H</option>
@@ -215,7 +215,7 @@
                         <i class="fa fa-pencil"></i>
                     </span>
 
-                    <input table="registros" field="telephone" key="<?= $id ?>" name="telephone" value="<?= $getRegistro->getTelephone() ?>" class="form-control md-text" type="text">
+                    <input name="telephone" value="<?= $getRegistro->getTelephone() ?>" class="form-control" type="text">
 
                 </div>
 
@@ -233,7 +233,7 @@
                         <i class="fa fa-pencil"></i>
                     </span>
 
-                    <input table="registros" field="telephone" key="<?= $id ?>" name="telephone" value="<?= $getRegistro->getTelephone() ?>" class="form-control md-text" type="text">
+                    <input name="telephoneAlt" value="<?= $getRegistro->getTelephoneAlt() ?>" class="form-control" type="text">
 
                 </div>
 
@@ -251,7 +251,7 @@
                         <i class="fa fa-pencil"></i>
                     </span>
 
-                    <input table="registros" field="email" key="<?= $id ?>" name="email" value="<?= $getRegistro->getEmail() ?>" class="form-control md-text" type="text">
+                    <input name="email" value="<?= $getRegistro->getEmail() ?>" class="form-control" type="text">
 
                 </div>
 
@@ -270,7 +270,7 @@
                         <i class="fa fa-pencil"></i>
                     </span>
 
-                    <input table="registros" field="modality" key="<?= $id ?>" name="modality" value="<?= $getRegistro->getModality() ?>" class="form-control md-text" type="text">
+                    <input name="modality" value="<?= $getRegistro->getModality() ?>" class="form-control" type="text">
 
                 </div>
 
@@ -287,7 +287,7 @@
 
                 <div class="input-group col-md-12">
 
-                   <select table="registros" field="periodicity" key="<?= $id ?>" class="form-control md-select">
+                   <select name="periodicity" class="form-control">
 
                         <option></option>
                         <option <?php if( $getRegistro->getPeriodicity() == 'Anual') echo 'selected' ?> value="Anual">Anual</option>
@@ -315,7 +315,7 @@
                         <i class="fa fa-calendar"></i>
                     </span>
 
-                    <input table="registros" field="renovation" key="<?= $id ?>" name="renovation" value="<?= $getRegistro->getRenovation()->format('d/m/Y') ?>" class="form-control md-text" type="text">
+                    <input name="renovation" value="<?= $getRegistro->getRenovation()->format('d/m/Y') ?>" class="form-control" type="text">
 
                 </div>
 
@@ -334,7 +334,7 @@
                         <i class="fa fa-pencil"></i>
                     </span>
 
-                    <input table="registros" field="capital" key="<?= $id ?>" name="capital" value="<?= number_format(intval($getRegistro->getCapital()), 0, ',', '.') ?>" class="form-control md-text" type="text">
+                    <input name="capital" value="<?= number_format(intval($getRegistro->getCapital()), 0, ',', '.') ?>" class="form-control" type="text">
 
                 </div>
 
@@ -352,7 +352,7 @@
                         <i class="fa fa-pencil"></i>
                     </span>
 
-                    <input table="registros" field="prima" key="<?= $id ?>" name="prima" value="<?= number_format(intval($getRegistro->getPrima()), 0, ',', '.') ?>" class="form-control md-text" type="text">
+                    <input table="registros" field="prima" key="<?= $id ?>" name="prima" value="<?= number_format(intval($getRegistro->getPrima()), 0, ',', '.') ?>" class="form-control" type="text">
                 </div>
 
             </div>
@@ -369,7 +369,7 @@
                         <i class="fa fa-pencil"></i>
                     </span>
 
-                    <input table="registros" field="actual_cob" key="<?= $id ?>" name="actual_cob" value="<?= $getRegistro->getActualCob() ?>" class="form-control md-text" type="text">
+                    <input table="registros" field="actual_cob" key="<?= $id ?>" name="actual_cob" value="<?= $getRegistro->getActualCob() ?>" class="form-control" type="text">
 
                 </div>
 
@@ -392,7 +392,7 @@
                         <i class="fa fa-pencil"></i>
                     </span>
 
-                    <input table="registros" field="prima_opc1" key="<?= $id ?>" name="prima_opc1" value="<?= $getRegistro->getPrimaOpc1() ?>" class="form-control md-text" type="text">
+                    <input table="registros" field="prima_opc1" key="<?= $id ?>" name="prima_opc1" value="<?= $getRegistro->getPrimaOpc1() ?>" class="form-control" type="text">
 
                 </div>
 
@@ -408,7 +408,7 @@
                         <i class="fa fa-pencil"></i>
                     </span>
 
-                    <input table="registros" field="ahorroeu_opc1" key="<?= $id ?>" name="ahorroeu_opc1" value="<?= $getRegistro->getAhorroeuOpc1() ?>" class="form-control md-text" type="text">
+                    <input table="registros" field="ahorroeu_opc1" key="<?= $id ?>" name="ahorroeu_opc1" value="<?= $getRegistro->getAhorroeuOpc1() ?>" class="form-control" type="text">
 
                 </div>
 
@@ -428,7 +428,7 @@
                         <i class="fa fa-pencil"></i>
                     </span>
 
-                    <input table="registros" field="cob_opc1" key="<?= $id ?>" name="cob_opc1" value="<?= $getRegistro->getCobOpc1() ?>" class="form-control md-text" type="text">
+                    <input table="registros" field="cob_opc1" key="<?= $id ?>" name="cob_opc1" value="<?= $getRegistro->getCobOpc1() ?>" class="form-control" type="text">
 
                 </div>
 
@@ -444,7 +444,7 @@
                         <i class="fa fa-pencil"></i>
                     </span>
 
-                    <input table="registros" field="ahorropercent_opc1" key="<?= $id ?>" name="ahorropercent_opc1" value="<?= $getRegistro->getAhorropercentOpc1() ?>" class="form-control md-text" type="text">
+                    <input table="registros" field="ahorropercent_opc1" key="<?= $id ?>" name="ahorropercent_opc1" value="<?= $getRegistro->getAhorropercentOpc1() ?>" class="form-control" type="text">
 
                 </div>
 
@@ -466,7 +466,7 @@
                         <i class="fa fa-pencil"></i>
                     </span>
 
-                    <input table="registros" field="Prima_opc2" key="<?= $id ?>" name="Prima_opc2" value="<?= $getRegistro->getPrimaOpc2() ?>" class="form-control md-text" type="text">
+                    <input table="registros" field="Prima_opc2" key="<?= $id ?>" name="Prima_opc2" value="<?= $getRegistro->getPrimaOpc2() ?>" class="form-control" type="text">
 
                 </div>
 
@@ -482,7 +482,7 @@
                         <i class="fa fa-pencil"></i>
                     </span>
 
-                    <input table="registros" field="ahorroeu_opc2" key="<?= $id ?>" name="ahorroeu_opc2" value="<?= $getRegistro->getAhorroeuOpc2() ?>" class="form-control md-text" type="text">
+                    <input table="registros" field="ahorroeu_opc2" key="<?= $id ?>" name="ahorroeu_opc2" value="<?= $getRegistro->getAhorroeuOpc2() ?>" class="form-control" type="text">
 
                 </div>
 
@@ -501,7 +501,7 @@
                         <i class="fa fa-pencil"></i>
                     </span>
 
-                    <input table="registros" field="cob_opc1" key="<?= $id ?>" name="cob_opc1" value="<?= $getRegistro->getActualCob() ?>" class="form-control md-text" type="text">
+                    <input table="registros" field="cob_opc1" key="<?= $id ?>" name="cob_opc1" value="<?= $getRegistro->getActualCob() ?>" class="form-control" type="text">
 
                 </div>
 
@@ -517,7 +517,7 @@
                         <i class="fa fa-pencil"></i>
                     </span>
 
-                    <input table="registros" field="ahorropercent_opc2" key="<?= $id ?>" name="ahorropercent_opc2" value="<?= $getRegistro->getAhorropercentOpc2() ?>" class="form-control md-text" type="text">
+                    <input table="registros" field="ahorropercent_opc2" key="<?= $id ?>" name="ahorropercent_opc2" value="<?= $getRegistro->getAhorropercentOpc2() ?>" class="form-control" type="text">
 
                 </div>
 
@@ -531,7 +531,7 @@
 
                 <div class="input-group col-md-12">
 
-                    <select table="registros" field="new_periodicity" key="<?= $id ?>" class="form-control md-select">
+                    <select name="new_periodicity" class="form-control">
                         <option></option>
                         <option <?php if( $getRegistro->getNewPeriodicity() == 'Anual') echo 'selected' ?> value="Anual">Anual</option>
                         <option <?php if( $getRegistro->getNewPeriodicity() == 'Semestral') echo 'selected' ?> value="Semestral">Semestral</option>
@@ -556,7 +556,7 @@
                         <i class="fa fa-pencil"></i>
                     </span>
 
-                    <input table="registros" field="ahorropercent_opc2" key="<?= $id ?>" name="lending_number " value="<?= $getRegistro->getLendingNumber() ?>" class="form-control md-text" type="text">
+                    <input name="lending_number " value="<?= $getRegistro->getLendingNumber() ?>" class="form-control" type="text">
 
                 </div>
 
@@ -578,7 +578,7 @@
                         <i class="fa fa-pencil"></i>
                     </span>
 
-                    <input table="registros" field="selec_ries" key="<?= $id ?>" name="selec_ries " value="<?= $getRegistro->getSelecRies() ?>" class="form-control md-text" type="text">
+                    <input name="selec_ries " value="<?= $getRegistro->getSelecRies() ?>" class="form-control" type="text">
 
                 </div>
 
@@ -598,7 +598,7 @@
                         <i class="fa fa-pencil"></i>
                     </span>
 
-                    <input table="registros" field="address" key="<?= $id ?>" name="address" value="<?= $getRegistro->getAddress() ?>" class="form-control md-text" placeholder="Persona que consta como administrador de la empresa" type="text">
+                    <input name="address" value="<?= $getRegistro->getAddress() ?>" class="form-control" placeholder="Persona que consta como administrador de la empresa" type="text">
 
                 </div>
 
@@ -617,7 +617,7 @@
                         <i class="fa fa-pencil"></i>
                     </span>
 
-                    <input table="registros" field="zip" key="<?= $id ?>" name="zip" value="<?= $getRegistro->getZip() ?>" class="form-control md-text" type="text">
+                    <input name="zip" value="<?= $getRegistro->getZip() ?>" class="form-control" type="text">
 
                 </div>
 
@@ -635,7 +635,7 @@
                         <i class="fa fa-pencil"></i>
                     </span>
 
-                    <input table="registros" field="city" key="<?= $id ?>" name="city" value="<?= $getRegistro->getCity() ?>" class="form-control md-text" type="text">
+                    <input name="city" value="<?= $getRegistro->getCity() ?>" class="form-control" type="text">
 
                 </div>
 
@@ -653,7 +653,7 @@
                         <i class="fa fa-pencil"></i>
                     </span>
 
-                    <input table="registros" field="province" key="<?= $id ?>" name="province" value="<?= $getRegistro->getProvince() ?>" class="form-control md-text" type="text">
+                    <input name="province" value="<?= $getRegistro->getProvince() ?>" class="form-control" type="text">
 
                 </div>
 
@@ -674,7 +674,7 @@
                         <i class="fa fa-pencil"></i>
                     </span>
 
-                    <input table="registros" field="way" key="<?= $id ?>" name="way" value="<?= $getRegistro->getWay() ?>" class="form-control md-text" type="text">
+                    <input table="registros" field="way" key="<?= $id ?>" name="way" value="<?= $getRegistro->getWay() ?>" class="form-control" type="text">
 
                 </div>
 
