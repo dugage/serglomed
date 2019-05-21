@@ -108,7 +108,14 @@ class Registros
      *
      * @Column(name="telephone", type="integer", precision=0, scale=0, nullable=false, unique=false)
      */
-    private $telephone;
+	private $telephone;
+	
+	/**
+     * @var integer
+     *
+     * @Column(name="telephoneAlt", type="integer", precision=0, scale=0, nullable=false, unique=false)
+     */
+    private $telephoneAlt;
 
     /**
      * @var string
@@ -621,6 +628,30 @@ class Registros
     public function getTelephone()
     {
         return $this->telephone;
+	}
+	
+	/**
+     * Set telephoneAlt
+     *
+     * @param integer $telephoneAlt
+     *
+     * @return Registros
+     */
+    public function setTelephoneAlt($telephoneAlt)
+    {
+        $this->telephoneAlt = $telephoneAlt;
+
+        return $this;
+    }
+
+    /**
+     * Get telephoneAlt
+     *
+     * @return integer
+     */
+    public function getTelephoneAlt()
+    {
+        return $this->telephoneAlt;
     }
 
     /**
