@@ -523,8 +523,26 @@
 
             </div>
         </div>
+	    
+	<div class="col-md-4">
+            <div class="form-group">
 
-        <div class="col-md-4">
+                <label>Cuenta Corriente</label>
+
+                <div class="input-group col-md-12">
+
+                    <span class="input-group-addon">
+                        <i class="fa fa-pencil"></i>
+                    </span>
+
+                    <input name="checking_account" value="<?= $this->encryption->decrypt($getRegistro->getCheckingAccount()) ?>" class="form-control md-text" type="text">
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-md-3">
             <div class="form-group">
 
                 <label>Nueva Periocidad</label>
@@ -545,7 +563,7 @@
         </div>
 
 
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="form-group">
 
                 <label>Nº Prestamo</label>
@@ -563,7 +581,7 @@
             </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-2">
             <div class="form-group">
                 <?php if (trim($getRegistro->getSelecRies()) == 'TLS'): ?>
                     <label style="color:red !important;">Selección Médica</label>
